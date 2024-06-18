@@ -42,7 +42,7 @@
 	</properties>
 
 	<modules>
-		<module>dws-introduction</module>
+		<module>dws-injection</module>
 	</modules>
 
 	<dependencies>

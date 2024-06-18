@@ -9,6 +9,6 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>dws-introduction</artifactId>
+    <artifactId>dws-injection</artifactId>
 
 </project>

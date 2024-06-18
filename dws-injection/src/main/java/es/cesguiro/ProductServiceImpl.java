@@ -4,7 +4,6 @@ package es.cesguiro;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class ProductServiceImpl implements ProductService{
 
