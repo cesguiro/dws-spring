@@ -42,7 +42,8 @@
 
 	<modules>
 		<module>dws-injection</module>
-	</modules>
+        <module>dws-functional</module>
+    </modules>
 
 	<dependencies>
 		<dependency>
