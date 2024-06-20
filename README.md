@@ -1,4 +1,4 @@
-## [Desarrollo web entorno servidor (daw - dws)](https://cesguiro.es/doku.php?id=clase:daw:dws:start)
+## [Desarrollo web entorno servidor (daw - dws)](https://cesguiro.es/doku.php/clase/daw/dws/start)
 
 ## Back-end con Spring Boot
 
