@@ -22,7 +22,11 @@ public class BookRepositoryJdbc implements BookRepository {
     @Override
     public List<Book> getAll()
     {
-        String sql = "SELECT * FROM books";
+        String sql = """
+                        SELECT * FROM books 
+                             LEFT JOIN categories ON books.category_id = categories.id 
+                             LEFT JOIN publishers ON books.publisher_id = publishers.id
+                     """;
         return jdbcTemplate.query(sql, new BookRowMapper());
     }
 

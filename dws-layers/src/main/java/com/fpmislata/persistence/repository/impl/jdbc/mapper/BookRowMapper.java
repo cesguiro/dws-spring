@@ -24,6 +24,7 @@ public class BookRowMapper implements RowMapper<Book>{
         book.setPrice(new BigDecimal(rs.getString("books.price")));
         book.setDiscount(rs.getFloat("books.discount"));
         book.setCover(rs.getString("books.cover"));
+        //book.setCategory(categoryRowMapper.mapRow(rs, rowNum));
         return book;
     }
 }
