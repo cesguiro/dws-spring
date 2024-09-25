@@ -23,9 +23,7 @@ public class BookRepositoryJdbc implements BookRepository {
     public List<Book> getAll()
     {
         String sql = """
-                        SELECT * FROM books 
-                             LEFT JOIN categories ON books.category_id = categories.id 
-                             LEFT JOIN publishers ON books.publisher_id = publishers.id
+                        SELECT * FROM books
                      """;
         return jdbcTemplate.query(sql, new BookRowMapper());
     }
@@ -36,12 +34,10 @@ public class BookRepositoryJdbc implements BookRepository {
                 SELECT * FROM books
                 LEFT JOIN categories ON books.category_id = categories.id
                 LEFT JOIN publishers ON books.publisher_id = publishers.id
-                AND books.isbn = ?
+                WHERE books.isbn = ?
            """;
         try {
             Book book = jdbcTemplate.queryForObject(sql, new BookRowMapper(), isbn);
-            CategoryRowMapper categoryRowMapper = new CategoryRowMapper();
-            Category category = categoryRowMapper.mapRow((ResultSet) book, 0);
             return Optional.of(book);
         } catch (Exception e) {
             return Optional.empty();

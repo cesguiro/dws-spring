@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CategoryRowMapper implements RowMapper<Category> {
+public class CategoryRowMapper implements CustomRowMapper<Category> {
 
 
     @Override
