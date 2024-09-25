@@ -43,6 +43,7 @@
 	<modules>
 		<module>dws-injection</module>
         <module>dws-functional</module>
+        <module>dws-layers</module>
     </modules>
 
 	<dependencies>
