@@ -1,16 +1,14 @@
 package com.fpmislata.persistence.repository.impl.jdbc;
 
 import com.fpmislata.domain.model.Book;
-import com.fpmislata.domain.model.Category;
+import com.fpmislata.persistence.repository.AuthorRepository;
 import com.fpmislata.persistence.repository.BookRepository;
+import com.fpmislata.persistence.repository.GenreRepository;
 import com.fpmislata.persistence.repository.impl.jdbc.mapper.BookRowMapper;
-import com.fpmislata.persistence.repository.impl.jdbc.mapper.CategoryRowMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +17,10 @@ import java.util.Optional;
 public class BookRepositoryJdbc implements BookRepository {
 
     private final JdbcTemplate jdbcTemplate;
+
+    private final AuthorRepository authorRepository;
+    private final GenreRepository genreRepository;
+
     @Override
     public List<Book> getAll()
     {
@@ -38,6 +40,8 @@ public class BookRepositoryJdbc implements BookRepository {
            """;
         try {
             Book book = jdbcTemplate.queryForObject(sql, new BookRowMapper(), isbn);
+            book.setAuthors(authorRepository.getByIsbnBook(isbn));
+            book.setGenres(genreRepository.getByIsbnBook(isbn));
             return Optional.of(book);
         } catch (Exception e) {
             return Optional.empty();
