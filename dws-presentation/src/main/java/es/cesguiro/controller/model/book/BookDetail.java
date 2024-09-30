@@ -13,6 +13,6 @@ public record BookDetail(
         float discount,
         String cover,
         PublisherCollection publisherCollection,
-        List<AuthorCollection> authorCollection
+        List<AuthorCollection> authorsCollection
 ) {
 }
