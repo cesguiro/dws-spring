@@ -5,6 +5,7 @@ import com.fpmislata.domain.service.BookService;
 import com.fpmislata.persistence.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
