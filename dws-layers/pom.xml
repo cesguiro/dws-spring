@@ -9,7 +9,6 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.fpmislata</groupId>
     <artifactId>dws-layers</artifactId>
 
     <properties>
@@ -28,7 +27,6 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
             <version>3.3.2</version>
         </dependency>
-
     </dependencies>
 
 
