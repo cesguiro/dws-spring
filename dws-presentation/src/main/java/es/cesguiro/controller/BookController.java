@@ -1,7 +1,8 @@
 package es.cesguiro.controller;
 
-import es.cesguiro.controller.model.book.BookMapper;
-import es.cesguiro.controller.model.book.BookQuery;
+import es.cesguiro.controller.webModel.book.BookCollection;
+import es.cesguiro.controller.webModel.book.BookDetail;
+import es.cesguiro.controller.webModel.book.BookMapper;
 import es.cesguiro.domain.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,18 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(BookController.URL)
 @RequiredArgsConstructor
 public class BookController {
 
-    public static final String URL = "/books";
+    public static final String URL = "/api/books";
 
     private final BookService bookService;
 
-    /*@GetMapping
+    @GetMapping
     public ResponseEntity<List<BookCollection>> getAll() {
         List<BookCollection> bookCollections = bookService
                 .getAll()
@@ -34,40 +34,13 @@ public class BookController {
                 .toList();
         //return ResponseEntity.ok(bookCollections);
         return new ResponseEntity<>(bookCollections, HttpStatus.OK);
-    }*/
-
-    @GetMapping
-    public ResponseEntity<List<BookQuery>> getAll() {
-        List<BookQuery> bookQueries = bookService
-                .getAll()
-                .stream()
-                .map(BookMapper.INSTANCE::toBookQuery)
-                .peek(bookQuery -> bookQuery.add(linkTo(methodOn(BookController.class).findByIsbn(bookQuery.getIsbn())).withSelfRel()))
-                .toList();
-        return new ResponseEntity<>(bookQueries, HttpStatus.OK);
     }
 
 
-
-    /*@GetMapping("/{isbn}")
-    public BookDetail findByIsbn(@PathVariable String isbn) {
-        return BookMapper.INSTANCE.toBookDetail(bookService.findByIsbn(isbn));
-    }*/
-
     @GetMapping("/{isbn}")
-    public ResponseEntity<BookQuery> findByIsbn(@PathVariable String isbn) {
-        BookQuery bookQuery = BookMapper.INSTANCE.toBookQuery(bookService.findByIsbn(isbn));
-        bookQuery
-                .getPublisherQuery()
-                .add(
-                        linkTo(methodOn(PublisherController.class).findBySlug(bookQuery.getPublisherQuery().getSlug())).withSelfRel()
-                );
-        bookQuery
-                .getAuthorQueries()
-                .forEach(authorQuery ->
-                    authorQuery.add(linkTo(methodOn(AuthorController.class).findById(authorQuery.getId())).withSelfRel())
-        );
-        return new ResponseEntity<>(bookQuery, HttpStatus.OK);
+    public ResponseEntity<BookDetail> findByIsbn(@PathVariable String isbn) {
+        BookDetail bookDetail = BookMapper.INSTANCE.toBookDetail(bookService.findByIsbn(isbn));
+        return new ResponseEntity<>(bookDetail, HttpStatus.OK);
     }
 
 }

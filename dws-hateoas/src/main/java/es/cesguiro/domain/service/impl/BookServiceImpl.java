@@ -4,9 +4,7 @@ import es.cesguiro.domain.exception.ResourceNotFoundException;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.service.BookService;
 import es.cesguiro.persistence.repository.BookRepository;
-import es.cesguiro.persistence.repository.impl.jdbc.BookRepositoryJdbc;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
