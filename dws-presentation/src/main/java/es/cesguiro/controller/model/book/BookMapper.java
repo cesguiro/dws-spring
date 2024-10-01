@@ -14,7 +14,11 @@ public interface BookMapper {
 
     BookCollection toBookCollection(Book book);
 
-    @Mapping(source = "publisher", target ="publisherCollection")
-    @Mapping(source = "authors", target="authorsCollection")
+    @Mapping(target ="publisherCollection", source = "publisher")
+    @Mapping(target="authorsCollection", source = "authors")
     BookDetail toBookDetail(Book book);
+
+    @Mapping(target ="publisherQuery", source = "publisher")
+    @Mapping(target="authorQueries", source = "authors")
+    BookQuery toBookQuery(Book book);
 }
