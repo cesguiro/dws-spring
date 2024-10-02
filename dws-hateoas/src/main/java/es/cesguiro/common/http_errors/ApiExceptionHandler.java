@@ -1,4 +1,4 @@
-package es.cesguiro.http_errors;
+package es.cesguiro.common.http_errors;
 
 import es.cesguiro.domain.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;

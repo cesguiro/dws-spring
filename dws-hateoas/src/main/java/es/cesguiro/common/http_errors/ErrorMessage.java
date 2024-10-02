@@ -1,4 +1,4 @@
-package es.cesguiro.http_errors;
+package es.cesguiro.common.http_errors;
 
 import lombok.Getter;
 import lombok.ToString;

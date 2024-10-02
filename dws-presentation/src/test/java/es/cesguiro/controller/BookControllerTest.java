@@ -88,17 +88,15 @@ class BookControllerTest {
     @Test
     @DisplayName("Test findByIsbn method with isbn not found")
     void testFindByIsbnNotFound() throws Exception {
-        // Mockear el comportamiento del servicio para lanzar una excepción
-        String isbn = "9999"; // Un ISBN que no existe
+        String isbn = "9999";
         when(bookService.findByIsbn(isbn)).thenThrow(new ResourceNotFoundException("Book isbn " + isbn + " not found"));
 
-        // Simular la solicitud GET para encontrar un libro por ISBN
         mockMvc.perform(get("/api/books/{isbn}", isbn)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())  // Verificar que el código de estado sea 404
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))  // Verificar que la respuesta sea JSON
-                .andExpect(jsonPath("$.error").value("ResourceNotFoundException"))  // Verificar el tipo de error
-                .andExpect(jsonPath("$.message").value("Resource not found. Book isbn 9999 not found"))  // Verificar el mensaje de error
-                .andExpect(jsonPath("$.code").value(404));  // Verificar el código de error
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.error").value("ResourceNotFoundException"))
+                .andExpect(jsonPath("$.message").value("Resource not found. Book isbn 9999 not found"))
+                .andExpect(jsonPath("$.code").value(404));
     }
 }
