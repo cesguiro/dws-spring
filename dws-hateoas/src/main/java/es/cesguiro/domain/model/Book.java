@@ -1,6 +1,9 @@
 package es.cesguiro.domain.model;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonInclude;
+=======
+>>>>>>> feature-presentation
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
