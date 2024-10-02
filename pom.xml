@@ -45,6 +45,7 @@
         <module>dws-functional</module>
         <module>dws-layers</module>
         <module>dws-presentation</module>
+        <module>dws-hateoas</module>
     </modules>
 
 	<dependencies>
