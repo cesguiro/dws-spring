@@ -12,12 +12,6 @@ public interface BookMapper {
 
     BookMapper INSTANCE = Mappers.getMapper(BookMapper.class);
 
-    BookCollection toBookCollection(Book book);
-
-    @Mapping(target ="publisherCollection", source = "publisher")
-    @Mapping(target="authorsCollection", source = "authors")
-    BookDetail toBookDetail(Book book);
-
     @Mapping(target ="publisherQuery", source = "publisher")
     @Mapping(target="authorQueries", source = "authors")
     BookQuery toBookQuery(Book book);

@@ -4,6 +4,8 @@ import es.cesguiro.controller.webModel.book.BookMapper;
 import es.cesguiro.controller.webModel.book.BookQuery;
 import es.cesguiro.domain.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.hateoas.HypermediaAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
