@@ -21,10 +21,10 @@ public class BookRowMapper implements CustomRowMapper<BookQuery> {
         bookQuery.setDiscount(rs.getFloat("books.discount"));
         bookQuery.setCover(rs.getString("books.cover"));
         if(this.existsColumn(rs, "publishers.id")) {
-            bookQuery.setPublisherQuery(publisherRowMapper.mapRow(rs, rowNum));
+            bookQuery.setPublisher(publisherRowMapper.mapRow(rs, rowNum));
         }
         if(this.existsColumn(rs, "categories.id")) {
-            bookQuery.setCategoryQuery(categoryRowMapper.mapRow(rs, rowNum));
+            bookQuery.setCategory(categoryRowMapper.mapRow(rs, rowNum));
         }
         return bookQuery;
     }

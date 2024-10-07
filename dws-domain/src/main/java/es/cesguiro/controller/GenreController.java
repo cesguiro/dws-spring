@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class GenreController {
 
-    public static final String URL = "/genres";
+    public static final String URL = "/api/genres";
     private final GenreService genreService;
 
     @PostMapping

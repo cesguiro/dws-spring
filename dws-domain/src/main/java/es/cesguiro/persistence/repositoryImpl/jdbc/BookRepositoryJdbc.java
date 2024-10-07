@@ -40,8 +40,8 @@ public class BookRepositoryJdbc implements BookRepository {
            """;
         try {
             BookQuery bookQuery = jdbcTemplate.queryForObject(sql, new BookRowMapper(), isbn);
-            bookQuery.setAuthorQueries(authorRepository.getByIsbnBook(isbn));
-            bookQuery.setGenreQueries(genreRepository.getByIsbnBook(isbn));
+            bookQuery.setAuthors(authorRepository.getByIsbnBook(isbn));
+            bookQuery.setGenres(genreRepository.getByIsbnBook(isbn));
             return Optional.of(bookQuery);
         } catch (Exception e) {
             return Optional.empty();

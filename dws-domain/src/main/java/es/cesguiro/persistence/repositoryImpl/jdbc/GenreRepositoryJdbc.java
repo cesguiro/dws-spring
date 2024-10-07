@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -19,8 +20,8 @@ public class GenreRepositoryJdbc implements GenreRepository {
     @Override
     public List<GenreQuery> getByIsbnBook(String isbn) {
         String sql = """
-                SELECT genreQueries.* FROM genreQueries
-                JOIN books_genres ON genreQueries.id = books_genres.genre_id
+                SELECT genres.* FROM genres
+                JOIN books_genres ON genres.id = books_genres.genre_id
                 JOIN books ON books_genres.book_id = books.id
                 AND books.isbn = ?
            """;
@@ -31,8 +32,22 @@ public class GenreRepositoryJdbc implements GenreRepository {
     public void insert(GenreCommand genreCommand) {
         String sql = """
                     INSERT INTO genres(name_es, name_en, slug) 
-                    VAULES(?, ?, ?)
+                    VALUES(?, ?, ?)
                 """;
         jdbcTemplate.update(sql, genreCommand.getName_es(), genreCommand.getName_en(), genreCommand.getSlug());
+    }
+
+    @Override
+    public Optional<GenreQuery> findBySlug(String slug) {
+        String sql = """
+                    SELECT * FROM genres WHERE genres.slug = ?
+                """;
+        try {
+            GenreQuery genreQuery = jdbcTemplate.queryForObject(sql, new GenreRowMapper(),slug);
+            return Optional.of(genreQuery);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
     }
 }

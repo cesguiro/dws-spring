@@ -17,22 +17,22 @@ public class BookQuery {
     private BigDecimal price;
     private float discount;
     private String cover;
-    private PublisherQuery publisherQuery;
-    private CategoryQuery categoryQuery;
-    private List<AuthorQuery> authorQueries;
-    private List<GenreQuery> genreQueries;
+    private PublisherQuery publisher;
+    private CategoryQuery category;
+    private List<AuthorQuery> authors;
+    private List<GenreQuery> genres;
 
-    public BookQuery(String isbn, String title, String synopsis, BigDecimal price, float discount, String cover, PublisherQuery publisherQuery, CategoryQuery categoryQuery, List<AuthorQuery> authorQueries, List<GenreQuery> genreQueries) {
+    public BookQuery(String isbn, String title, String synopsis, BigDecimal price, float discount, String cover, PublisherQuery publisher, CategoryQuery category, List<AuthorQuery> authors, List<GenreQuery> genres) {
         this.isbn = isbn;
         this.title = title;
         this.synopsis = synopsis;
         setPrice(price);
         this.discount = discount;
         this.cover = cover;
-        this.publisherQuery = publisherQuery;
-        this.categoryQuery = categoryQuery;
-        this.authorQueries = authorQueries;
-        this.genreQueries = genreQueries;
+        this.publisher = publisher;
+        this.category = category;
+        this.authors = authors;
+        this.genres = genres;
     }
 
     public void setPrice(BigDecimal price) {
