@@ -1,8 +1,8 @@
-package es.cesguiro.persistence.repository.impl.jdbc;
+package es.cesguiro.persistence.repositoryImpl.jdbc;
 
-import es.cesguiro.domain.model.Author;
-import es.cesguiro.persistence.repository.AuthorRepository;
-import es.cesguiro.persistence.repository.impl.jdbc.mapper.AuthorRowMapper;
+import es.cesguiro.domain.model.query.AuthorQuery;
+import es.cesguiro.domain.repository.AuthorRepository;
+import es.cesguiro.persistence.repositoryImpl.jdbc.mapper.AuthorRowMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,7 +16,7 @@ public class AuthorRepositoryJdbc implements AuthorRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Author> getByIsbnBook(String isbn) {
+    public List<AuthorQuery> getByIsbnBook(String isbn) {
         String sql = """
                 SELECT authorQueries.* FROM authorQueries
                 JOIN books_authors ON authorQueries.id = books_authors.author_id

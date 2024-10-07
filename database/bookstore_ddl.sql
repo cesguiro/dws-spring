@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS bookstore;
 CREATE DATABASE bookstore;
 USE bookstore;
 
-CREATE TABLE genres (
+CREATE TABLE genreQueries (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name_es VARCHAR(255) NOT NULL,
     name_en VARCHAR(255) NOT NULL,
@@ -43,10 +43,10 @@ CREATE TABLE books_genres (
     book_id INT,
     genre_id INT,
     FOREIGN KEY (book_id) REFERENCES books(id),
-    FOREIGN KEY (genre_id) REFERENCES genres(id)
+    FOREIGN KEY (genre_id) REFERENCES genreQueries(id)
 );
 
-CREATE TABLE authors (
+CREATE TABLE authorQueries (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     nationality VARCHAR(255),
@@ -61,7 +61,7 @@ CREATE TABLE books_authors (
     book_id INT,
     author_id INT,
     FOREIGN KEY (book_id) REFERENCES books(id),
-    FOREIGN KEY (author_id) REFERENCES authors(id)
+    FOREIGN KEY (author_id) REFERENCES authorQueries(id)
 );
 
 CREATE TABLE users (
