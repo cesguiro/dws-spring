@@ -41,4 +41,5 @@ public class BookQuery {
         }
         this.price = price.setScale(2, RoundingMode.HALF_UP);
     }
+
 }

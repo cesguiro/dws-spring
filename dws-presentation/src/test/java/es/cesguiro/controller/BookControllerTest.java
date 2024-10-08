@@ -96,7 +96,6 @@ class BookControllerTest {
                 .andExpect(status().isNotFound())  // Verificar que el código de estado sea 404
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.error").value("ResourceNotFoundException"))
-                .andExpect(jsonPath("$.message").value("Resource not found. Book isbn 9999 not found"))
-                .andExpect(jsonPath("$.code").value(404));
+                .andExpect(jsonPath("$.message").value("Resource not found. Book isbn 9999 not found"));
     }
 }

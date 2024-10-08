@@ -9,11 +9,9 @@ public class ErrorMessage {
 
     private final String error;
     private final String message;
-    private final int code;
 
-    public ErrorMessage(Exception exception, int code) {
+    public ErrorMessage(Exception exception) {
         this.error = exception.getClass().getSimpleName();
         this.message = exception.getMessage();
-        this.code = code;
     }
 }

@@ -6,7 +6,6 @@ import es.cesguiro.domain.model.query.BookQuery;
 import es.cesguiro.domain.service.BookService;
 import es.cesguiro.domain.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,6 +14,7 @@ import java.util.List;
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public List<BookQuery> getAll() {
@@ -25,4 +25,5 @@ public class BookServiceImpl implements BookService {
     public BookQuery findByIsbn(String isbn) {
         return bookRepository.findByIsbn(isbn).orElseThrow(() -> new ResourceNotFoundException("Book isbn " + isbn + " not found"));
     }
+
 }
