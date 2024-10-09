@@ -34,7 +34,7 @@ public class GenreRepositoryJdbc implements GenreRepository {
                     INSERT INTO genres(name_es, name_en, slug) 
                     VALUES(?, ?, ?)
                 """;
-        jdbcTemplate.update(sql, genreCommand.getName_es(), genreCommand.getName_en(), genreCommand.getSlug());
+        jdbcTemplate.update(sql, genreCommand.getNameEs(), genreCommand.getNameEn(), genreCommand.getSlug());
     }
 
     @Override

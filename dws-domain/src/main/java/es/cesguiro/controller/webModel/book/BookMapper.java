@@ -3,6 +3,7 @@ package es.cesguiro.controller.webModel.book;
 import es.cesguiro.controller.webModel.author.AuthorMapper;
 import es.cesguiro.controller.webModel.genre.GenreMapper;
 import es.cesguiro.controller.webModel.publisher.PublisherMapper;
+import es.cesguiro.domain.model.command.BookCommand;
 import es.cesguiro.domain.model.query.BookQuery;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

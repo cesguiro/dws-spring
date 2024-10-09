@@ -1,5 +1,6 @@
 package es.cesguiro.domain.model.query;
 
+import es.cesguiro.domain.exception.ResourceAlreadyExistsException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -42,4 +43,17 @@ public class BookQuery {
         this.price = price.setScale(2, RoundingMode.HALF_UP);
     }
 
+    public void addGenre(GenreQuery genre) {
+        if(this.genres.stream().anyMatch(g -> g.getSlug().equals(genre.getSlug()))) {
+            throw new ResourceAlreadyExistsException("Genre " + genre.getName() + " already exists in book " + this.title);
+        }
+        this.genres.add(genre);
+    }
+
+    public void addAuthor(AuthorQuery author) {
+        if (this.authors.stream().anyMatch(a -> a.getId() == author.getId())) {
+            throw new ResourceAlreadyExistsException("Author " + author.getName() + " already exists in book " + this.title);
+        }
+        this.authors.add(author);
+    }
 }

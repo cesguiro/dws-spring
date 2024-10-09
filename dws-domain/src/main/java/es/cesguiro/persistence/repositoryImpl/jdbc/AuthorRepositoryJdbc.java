@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -24,5 +25,18 @@ public class AuthorRepositoryJdbc implements AuthorRepository {
                 AND books.isbn = ?
            """;
         return jdbcTemplate.query(sql, new AuthorRowMapper(), isbn);
+    }
+
+    @Override
+    public Optional<AuthorQuery> findById(long id) {
+        String sql = """
+                SELECT * FROM authors WHERE id = ?
+           """;
+        try {
+            AuthorQuery authorQuery = jdbcTemplate.queryForObject(sql, new AuthorRowMapper(), id);
+            return Optional.of(authorQuery);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 }

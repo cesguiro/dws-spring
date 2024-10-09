@@ -13,4 +13,5 @@ public interface GenreRepository {
     void insert(GenreCommand genreCommand);
 
     Optional<GenreQuery> findBySlug(String slug);
+
 }
