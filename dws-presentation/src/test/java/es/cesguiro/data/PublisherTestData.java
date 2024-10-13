@@ -1,6 +1,6 @@
 package es.cesguiro.data;
 
-import es.cesguiro.domain.model.Publisher;
+import es.cesguiro.domain.user.model.Publisher;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package es.cesguiro.data;
 
-import es.cesguiro.domain.model.*;
+import es.cesguiro.domain.user.model.*;
 
 import java.math.BigDecimal;
 import java.util.List;

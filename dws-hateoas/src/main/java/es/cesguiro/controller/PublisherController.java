@@ -1,6 +1,6 @@
 package es.cesguiro.controller;
 
-import es.cesguiro.controller.webModel.publisher.PublisherQuery;
+import es.cesguiro.controller.user.webModel.publisher.PublisherQuery;
 import es.cesguiro.domain.service.PublisherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

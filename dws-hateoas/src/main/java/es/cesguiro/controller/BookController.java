@@ -1,7 +1,7 @@
 package es.cesguiro.controller;
 
-import es.cesguiro.controller.webModel.book.BookMapper;
-import es.cesguiro.controller.webModel.book.BookQuery;
+import es.cesguiro.controller.user.webModel.book.BookMapper;
+import es.cesguiro.controller.user.webModel.book.BookQuery;
 import es.cesguiro.domain.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

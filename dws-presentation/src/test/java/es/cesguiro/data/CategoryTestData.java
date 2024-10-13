@@ -1,6 +1,6 @@
 package es.cesguiro.data;
 
-import es.cesguiro.domain.model.Category;
+import es.cesguiro.domain.user.model.Category;
 
 import java.util.List;
 
