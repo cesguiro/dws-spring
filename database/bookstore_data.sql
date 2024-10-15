@@ -7,12 +7,12 @@ TRUNCATE TABLE orders_details;
 TRUNCATE TABLE orders;
 TRUNCATE TABLE reviews;
 TRUNCATE TABLE books_authors;
-TRUNCATE TABLE authorQueries;
+TRUNCATE TABLE authors;
 TRUNCATE TABLE books_genres;
 TRUNCATE TABLE books;
 TRUNCATE TABLE publishers;
 TRUNCATE TABLE categories;
-TRUNCATE TABLE genreQueries;
+TRUNCATE TABLE genres;
 TRUNCATE TABLE users;
 
 SET FOREIGN_KEY_CHECKS = 1;

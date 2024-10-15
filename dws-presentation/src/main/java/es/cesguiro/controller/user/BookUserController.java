@@ -49,7 +49,7 @@ public class BookUserController {
 
         String baseUrl = request.getRequestURL().toString();
 
-        PaginatedResponse<BookCollection> response = new PaginatedResponse<>(bookCollections, (int) total, page, size, baseUrl);
+        PaginatedResponse<BookCollection> response = new PaginatedResponse<>(bookCollections, total, page, size, baseUrl);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

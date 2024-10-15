@@ -18,8 +18,8 @@ public class GenreRepositoryJdbc implements GenreRepository {
     @Override
     public List<Genre> getByIsbnBook(String isbn) {
         String sql = """
-                SELECT genreQueries.* FROM genreQueries
-                JOIN books_genres ON genreQueries.id = books_genres.genre_id
+                SELECT genres.* FROM genres
+                JOIN books_genres ON genres.id = books_genres.genre_id
                 JOIN books ON books_genres.book_id = books.id
                 AND books.isbn = ?
            """;
