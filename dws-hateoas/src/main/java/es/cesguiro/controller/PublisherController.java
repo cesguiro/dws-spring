@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PublisherController {
 
-    public static final String URL = "/publishers";
+    public static final String URL = "/api/publishers";
 
     private final PublisherService publisherService;
 

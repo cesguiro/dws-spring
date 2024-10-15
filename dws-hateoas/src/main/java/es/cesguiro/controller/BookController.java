@@ -21,7 +21,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RequiredArgsConstructor
 public class BookController {
 
-    public static final String URL = "/books";
+    public static final String URL = "/api/books";
 
     private final BookService bookService;
 

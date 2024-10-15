@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(AuthorController.URL)
 public class AuthorController {
 
-    public static final String URL = "/authors";
+    public static final String URL = "/api/authors";
 
     @GetMapping("/{id}")
     public AuthorQuery findById(@PathVariable long id) {
