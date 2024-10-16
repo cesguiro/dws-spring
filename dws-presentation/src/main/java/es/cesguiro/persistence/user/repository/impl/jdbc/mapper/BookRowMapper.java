@@ -17,11 +17,11 @@ public class BookRowMapper implements CustomRowMapper<Book> {
 
     @Override
     public Book mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-        String language = LanguageUtils.getCurrentLanguage();
+        //String language = LanguageUtils.getCurrentLanguage();
         Book book = new Book();
         book.setIsbn(resultSet.getString("books.isbn"));
-        book.setTitle(resultSet.getString("books.title_" + language));
-        book.setSynopsis(resultSet.getString("books.synopsis_" + language));
+        book.setTitle(resultSet.getString("books.title_" + getLanguage()));
+        book.setSynopsis(resultSet.getString("books.synopsis_" + getLanguage()));
         book.setPrice(new BigDecimal(resultSet.getString("books.price")));
         book.setDiscount(resultSet.getFloat("books.discount"));
         book.setCover(resultSet.getString("books.cover"));
