@@ -7,6 +7,7 @@ import es.cesguiro.controller.user.webmodel.book.BookMapper;
 import es.cesguiro.domain.user.service.BookUserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ public class BookUserController {
     public static final String URL = "/api/books";
 
     private final BookUserService bookUserService;
+
 
     /*@GetMapping
     public ResponseEntity<List<BookCollection>> getAll() {
