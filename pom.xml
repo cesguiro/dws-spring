@@ -46,7 +46,6 @@
         <module>dws-layers</module>
         <module>dws-presentation</module>
         <module>dws-hateoas</module>
-        <module>dws-domain</module>
     </modules>
 
 	<dependencies>

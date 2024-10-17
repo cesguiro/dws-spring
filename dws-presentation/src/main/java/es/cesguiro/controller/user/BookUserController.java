@@ -5,7 +5,6 @@ import es.cesguiro.controller.user.webmodel.book.BookCollection;
 import es.cesguiro.controller.user.webmodel.book.BookDetail;
 import es.cesguiro.controller.user.webmodel.book.BookMapper;
 import es.cesguiro.domain.user.service.BookUserService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -14,44 +13,34 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-
 @RestController
-@RequestMapping(BookUserController.URL)
 @RequiredArgsConstructor
+@RequestMapping(BookUserController.URL)
 public class BookUserController {
 
     public static final String URL = "/api/books";
+    @Value("${app.base.url}")
+    private String baseUrl;
+
+    @Value("${app.pageSize.default}")
+    private String defaultPageSize;
 
     private final BookUserService bookUserService;
-
-
-    /*@GetMapping
-    public ResponseEntity<List<BookCollection>> getAll() {
-        List<BookCollection> bookCollections = bookUserService
-                .getAll()
-                .stream()
-                .map(BookMapper.INSTANCE::toBookCollection)
-                .toList();
-        //return ResponseEntity.ok(bookCollections);
-        return new ResponseEntity<>(bookCollections, HttpStatus.OK);
-    }*/
 
     @GetMapping
     public ResponseEntity<PaginatedResponse<BookCollection>> getAll(
             @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "10") int size,
-            HttpServletRequest request) {
+            @RequestParam(required = false) Integer size) {
+
+        int pageSize = (size != null) ? size : Integer.parseInt(defaultPageSize);
         List<BookCollection> bookCollections = bookUserService
-                .getAll(page - 1, size)
+                .getAll(page - 1, pageSize)
                 .stream()
                 .map(BookMapper.INSTANCE::toBookCollection)
                 .toList();
         int total = bookUserService.count();
 
-        String baseUrl = request.getRequestURL().toString();
-
-        PaginatedResponse<BookCollection> response = new PaginatedResponse<>(bookCollections, total, page, size, baseUrl);
+        PaginatedResponse<BookCollection> response = new PaginatedResponse<>(bookCollections, total, page, pageSize, baseUrl + URL);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
