@@ -1,0 +1,35 @@
+package es.cesguiro.persistence.admin.repository.impl.jdbc.mapper;
+
+import es.cesguiro.domain.admin.model.Book;
+import es.cesguiro.persistence.common.CustomRowMapper;
+
+import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class BookRowMapper implements CustomRowMapper<Book> {
+
+    private final PublisherRowMapper publisherRowMapper = new PublisherRowMapper();
+    private final CategoryRowMapper categoryRowMapper = new CategoryRowMapper();
+
+    @Override
+    public Book mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+        Book book = new Book();
+        book.setId(resultSet.getLong("id"));
+        book.setIsbn(resultSet.getString("isbn"));
+        book.setTitleEs(resultSet.getString("title_es"));
+        book.setTitleEn(resultSet.getString("title_en"));
+        book.setSynopsisEs(resultSet.getString("synopsis_es"));
+        book.setSynopsisEn(resultSet.getString("synopsis_en"));
+        book.setPrice(new BigDecimal(resultSet.getString("books.price")));
+        book.setDiscount(resultSet.getFloat("books.discount"));
+        book.setCover(resultSet.getString("books.cover"));
+        if(this.existsColumn(resultSet, "publishers.id")) {
+            book.setPublisher(publisherRowMapper.mapRow(resultSet, rowNum));
+        }
+        if(this.existsColumn(resultSet, "categories.id")) {
+            book.setCategory(categoryRowMapper.mapRow(resultSet, rowNum));
+        }
+        return book;
+    }
+}
