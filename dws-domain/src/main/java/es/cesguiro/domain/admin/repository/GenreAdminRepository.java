@@ -8,4 +8,6 @@ public interface GenreAdminRepository {
     List<Genre> getByIsbnBook(String isbn);
 
     List<Genre> getByIdBook(int idBook);
+
+    List<Genre> findAllById(Long[] ids);
 }

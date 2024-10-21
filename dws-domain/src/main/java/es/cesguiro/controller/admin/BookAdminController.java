@@ -5,6 +5,7 @@ import es.cesguiro.controller.admin.webmodel.book.BookMapper;
 import es.cesguiro.controller.common.PaginatedResponse;
 import es.cesguiro.domain.admin.model.Author;
 import es.cesguiro.domain.admin.model.Book;
+import es.cesguiro.domain.admin.model.Genre;
 import es.cesguiro.domain.admin.service.BookAdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,6 +55,12 @@ public class BookAdminController {
     @PostMapping("/{id}/authors")
     public ResponseEntity<Void> insertAuthors(@PathVariable Integer id, @RequestBody List<Author> authors) {
         bookAdminService.insertAuthors(id, authors);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/{id}/genres")
+    public ResponseEntity<Void> insertGenres(@PathVariable Integer id, @RequestBody List<Genre> genres) {
+        bookAdminService.insertGenres(id, genres);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

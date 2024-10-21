@@ -46,7 +46,7 @@ public class AuthorAdminRepositoryImpl implements AuthorAdminRepository {
                SELECT authors.* FROM authors
                WHERE id IN (:ids)   
            """;
-        Map<String, Object> params = Map.of("ids", Arrays.asList(ids));
+        Map<String, List<Long>> params = Map.of("ids", Arrays.asList(ids));
         return namedParameterJdbcTemplate.query(sql, params, new AuthorRowMapper());
     }
 }

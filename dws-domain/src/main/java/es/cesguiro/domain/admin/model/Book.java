@@ -1,10 +1,10 @@
 package es.cesguiro.domain.admin.model;
 
 import es.cesguiro.common.exception.ResourceAlreadyExistsException;
-import es.cesguiro.common.locale.LanguageUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import es.cesguiro.common.locale.LanguageUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -45,5 +45,15 @@ public class Book {
            throw new ResourceAlreadyExistsException("Author " + author.getName() + "already exists");
         }
         authors.add(author);
+    }
+
+    public void addGenre(Genre genre) {
+        if (genres == null) {
+            genres = new ArrayList<>();
+        }
+        if (genres.contains(genre)) {
+            throw new ResourceAlreadyExistsException("Genre " + genre.getId() + "already exists");
+        }
+        genres.add(genre);
     }
 }
