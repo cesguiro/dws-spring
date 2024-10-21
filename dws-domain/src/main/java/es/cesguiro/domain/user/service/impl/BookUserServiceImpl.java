@@ -1,5 +1,6 @@
 package es.cesguiro.domain.user.service.impl;
 
+import es.cesguiro.common.annotation.DomainService;
 import es.cesguiro.common.exception.ResourceNotFoundException;
 import es.cesguiro.domain.user.model.Book;
 import es.cesguiro.domain.user.service.BookUserService;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@DomainService
 @RequiredArgsConstructor
 public class BookUserServiceImpl implements BookUserService {
 

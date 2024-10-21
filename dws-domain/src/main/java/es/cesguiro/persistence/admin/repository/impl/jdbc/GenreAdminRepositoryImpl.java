@@ -36,7 +36,7 @@ public class GenreAdminRepositoryImpl implements GenreAdminRepository {
         String sql = """
                 SELECT genres.* FROM genres
                 JOIN books_genres ON genres.id = books_genres.genre_id
-                AND books_genres.id_book = ?
+                AND books_genres.book_id = ?
            """;
         return jdbcTemplate.query(sql, new GenreRowMapper(),idBook);
     }
