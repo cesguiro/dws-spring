@@ -17,8 +17,8 @@ TRUNCATE TABLE users;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
--- Insert genreQueries
-INSERT INTO genreQueries (name_es, name_en, slug) VALUES
+-- Insert genres
+INSERT INTO genres (name_es, name_en, slug) VALUES
     ('Infantil', 'Children\'s', 'childrens'),
     ('Juvenil', 'Young adult', 'young-adult'),
     ('Ficción', 'Fiction', 'fiction'),
@@ -78,8 +78,8 @@ INSERT INTO bookstore.books (isbn,title_es,title_en,synopsis_es,synopsis_en,pric
 	 ('9780060853983','American Gods','American Gods','American Gods sigue a Shadow Moon, un exconvicto que se convierte en guardaespaldas del enigmático Sr. Wednesday. Pronto descubre que su jefe es una encarnación de Odín, y se ve envuelto en una batalla entre los antiguos dioses y los nuevos.','American Gods follows Shadow Moon, an ex-convict who becomes the bodyguard of the enigmatic Mr. Wednesday. He soon discovers that his boss is an incarnation of Odin, and he becomes embroiled in a battle between the old gods and the new.',17.99,15.00,'http://images.cesguiro.es/books/9780060853983.webp',5,4),
 	 ('9780060557812','Stardust','Stardust','Stardust narra la aventura de Tristran Thorn, quien promete traerle a su amada una estrella caída. Su búsqueda lo lleva al reino mágico de Faerie, donde descubre que la estrella es una mujer y se enfrenta a peligros inesperados.','Stardust tells the adventure of Tristran Thorn, who promises to bring his beloved a fallen star. His quest leads him to the magical realm of Faerie, where he discovers that the star is a woman and faces unexpected dangers.',15.99,5.00,'http://images.cesguiro.es/books/9780060557812.webp',5,2);
 
--- Insert authorQueries
-INSERT INTO authorQueries (name, nationality, biography_en, biography_es, birth_year, death_year) VALUES
+-- Insert authors
+INSERT INTO authors (name, nationality, biography_en, biography_es, birth_year, death_year) VALUES
     ('Antoine de Saint-Exupéry', 'French', 'Antoine de Saint-Exupéry was a French writer, poet, aristocrat, journalist, and pioneering aviator. He is best remembered for his novella The Little Prince and for his lyrical aviation writings.', 'Antoine de Saint-Exupéry fue un escritor, poeta, aristócrata, periodista y aviador pionero francés. Es recordado por su novela corta El principito y por sus escritos líricos sobre la aviación.', 1900, 1944),
     ('Roald Dahl', 'British', 'Roald Dahl was a British novelist, short-story writer, poet, screenwriter, and wartime fighter pilot. His books have sold more than 250 million copies worldwide.', 'Roald Dahl fue un novelista, cuentista, poeta, guionista y piloto de combate británico. Sus libros han vendido más de 250 millones de copias en todo el mundo.', 1916, 1990),
     ('Maurice Sendak', 'American', 'Maurice Sendak was an American illustrator and writer of children''s books. He became widely known for his bookQuery Where the Wild Things Are.', 'Maurice Sendak fue un ilustrador y escritor estadounidense de libros infantiles. Se hizo conocido mundialmente por su libro Donde viven los monstruos.', 1928, 2012),

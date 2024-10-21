@@ -43,7 +43,7 @@ CREATE TABLE books_genres (
     book_id INT,
     genre_id INT,
     FOREIGN KEY (book_id) REFERENCES books(id),
-    FOREIGN KEY (genre_id) REFERENCES genreQueries(id)
+    FOREIGN KEY (genre_id) REFERENCES genres(id)
 );
 
 CREATE TABLE authors (
@@ -61,7 +61,7 @@ CREATE TABLE books_authors (
     book_id INT,
     author_id INT,
     FOREIGN KEY (book_id) REFERENCES books(id),
-    FOREIGN KEY (author_id) REFERENCES authorQueries(id)
+    FOREIGN KEY (author_id) REFERENCES authors(id)
 );
 
 CREATE TABLE users (
