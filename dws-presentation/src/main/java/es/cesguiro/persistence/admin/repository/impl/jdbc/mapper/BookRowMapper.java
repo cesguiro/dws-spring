@@ -15,12 +15,12 @@ public class BookRowMapper implements CustomRowMapper<Book> {
     @Override
     public Book mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         Book book = new Book();
-        book.setId(resultSet.getLong("id"));
-        book.setIsbn(resultSet.getString("isbn"));
-        book.setTitleEs(resultSet.getString("title_es"));
-        book.setTitleEn(resultSet.getString("title_en"));
-        book.setSynopsisEs(resultSet.getString("synopsis_es"));
-        book.setSynopsisEn(resultSet.getString("synopsis_en"));
+        book.setId(resultSet.getLong("books.id"));
+        book.setIsbn(resultSet.getString("books.isbn"));
+        book.setTitleEs(resultSet.getString("books.title_es"));
+        book.setTitleEn(resultSet.getString("books.title_en"));
+        book.setSynopsisEs(resultSet.getString("books.synopsis_es"));
+        book.setSynopsisEn(resultSet.getString("books.synopsis_en"));
         book.setPrice(new BigDecimal(resultSet.getString("books.price")));
         book.setDiscount(resultSet.getFloat("books.discount"));
         book.setCover(resultSet.getString("books.cover"));
