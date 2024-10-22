@@ -8,6 +8,7 @@ import es.cesguiro.domain.admin.repository.BookAdminRepository;
 import es.cesguiro.domain.admin.repository.GenreAdminRepository;
 import es.cesguiro.persistence.admin.repository.impl.jdbc.mapper.BookRowMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -61,16 +62,16 @@ public class BookAdminRepositoryImpl implements BookAdminRepository {
            """;
         try {
             Book book = jdbcTemplate.queryForObject(sql, new BookRowMapper(), isbn);
-            book.setAuthors(authorAdminRepository.getByIsbnBook(isbn));
-            book.setGenres(genreAdminRepository.getByIsbnBook(isbn));
+            //book.setAuthors(authorAdminRepository.getByIsbnBook(isbn));
+            //book.setGenres(genreAdminRepository.getByIsbnBook(isbn));
             return Optional.of(book);
-        } catch (Exception e) {
+        } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
     }
 
     @Override
-    public Optional<Book> findById(int id) {
+    public Optional<Book> findById(long id) {
         String sql = """
                 SELECT * FROM books
                 LEFT JOIN categories ON books.category_id = categories.id
@@ -79,10 +80,10 @@ public class BookAdminRepositoryImpl implements BookAdminRepository {
            """;
         try {
             Book book = jdbcTemplate.queryForObject(sql, new BookRowMapper(), id);
-            book.setAuthors(authorAdminRepository.getByIdBook(id));
-            book.setGenres(genreAdminRepository.getByIdBook(id));
+            //book.setAuthors(authorAdminRepository.getByIdBook(id));
+            //book.setGenres(genreAdminRepository.getByIdBook(id));
             return Optional.of(book);
-        } catch (Exception e) {
+        } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
     }

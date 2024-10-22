@@ -7,7 +7,7 @@ import java.util.List;
 public interface AuthorAdminRepository {
     List<Author> getByIsbnBook(String isbn);
 
-    List<Author> getByIdBook(int idBook);
+    List<Author> getByIdBook(long idBook);
 
     List<Author> findAllById(Long[] ids);
 }

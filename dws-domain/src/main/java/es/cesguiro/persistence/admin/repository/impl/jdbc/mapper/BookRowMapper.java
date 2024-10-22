@@ -24,7 +24,7 @@ public class BookRowMapper implements CustomRowMapper<Book> {
         book.setPrice(new BigDecimal(resultSet.getString("books.price")));
         book.setDiscount(resultSet.getFloat("books.discount"));
         book.setCover(resultSet.getString("books.cover"));
-        if(this.existsColumn(resultSet, "books.publishers.id")) {
+        if(this.existsColumn(resultSet, "publishers.id")) {
             book.setPublisher(publisherRowMapper.mapRow(resultSet, rowNum));
         }
         if(this.existsColumn(resultSet, "categories.id")) {

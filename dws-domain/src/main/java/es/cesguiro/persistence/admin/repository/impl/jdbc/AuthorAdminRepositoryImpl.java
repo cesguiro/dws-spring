@@ -31,7 +31,7 @@ public class AuthorAdminRepositoryImpl implements AuthorAdminRepository {
     }
 
     @Override
-    public List<Author> getByIdBook(int idBook) {
+    public List<Author> getByIdBook(long idBook) {
         String sql = """
                 SELECT authors.* FROM authors
                 JOIN books_authors ON authors.id = books_authors.author_id

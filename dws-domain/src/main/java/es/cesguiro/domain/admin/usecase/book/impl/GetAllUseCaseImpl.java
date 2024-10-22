@@ -1,16 +1,16 @@
-package es.cesguiro.domain.admin.usecase.impl;
+package es.cesguiro.domain.admin.usecase.book.impl;
 
 import es.cesguiro.common.annotation.DomainUseCase;
 import es.cesguiro.domain.admin.model.Book;
 import es.cesguiro.domain.admin.service.BookAdminService;
-import es.cesguiro.domain.admin.usecase.GetAllBooksUseCase;
+import es.cesguiro.domain.admin.usecase.book.GetAllUseCase;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @DomainUseCase
 @RequiredArgsConstructor
-public class GetAllBooksUseCaseImpl implements GetAllBooksUseCase {
+public class GetAllUseCaseImpl implements GetAllUseCase {
 
     private final BookAdminService bookAdminService;
 

@@ -7,7 +7,7 @@ import java.util.List;
 public interface GenreAdminRepository {
     List<Genre> getByIsbnBook(String isbn);
 
-    List<Genre> getByIdBook(int idBook);
+    List<Genre> getByIdBook(long idBook);
 
     List<Genre> findAllById(Long[] ids);
 }

@@ -16,9 +16,11 @@ public interface BookAdminService {
 
     Optional<Book> findByIsbn(String isbn);
 
-    void insertAuthors(int idBook, List<Author> authors);
+    Optional<Book> findById(long id);
 
-    void insert(Book book);
+    void save(Book book);
 
-    void insertGenres(Integer idBook, List<Genre> genres);
+    void addAuthor(Book book, Author author);
+
+    void addGenre(Book book, Genre genre);
 }

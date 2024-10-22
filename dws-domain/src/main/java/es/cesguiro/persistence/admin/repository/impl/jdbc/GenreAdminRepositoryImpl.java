@@ -2,7 +2,6 @@ package es.cesguiro.persistence.admin.repository.impl.jdbc;
 
 import es.cesguiro.domain.admin.model.Genre;
 import es.cesguiro.domain.admin.repository.GenreAdminRepository;
-import es.cesguiro.persistence.admin.repository.impl.jdbc.mapper.AuthorRowMapper;
 import es.cesguiro.persistence.admin.repository.impl.jdbc.mapper.GenreRowMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -32,7 +31,7 @@ public class GenreAdminRepositoryImpl implements GenreAdminRepository {
     }
 
     @Override
-    public List<Genre> getByIdBook(int idBook) {
+    public List<Genre> getByIdBook(long idBook) {
         String sql = """
                 SELECT genres.* FROM genres
                 JOIN books_genres ON genres.id = books_genres.genre_id
