@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @DomainService
 @RequiredArgsConstructor
@@ -39,8 +40,8 @@ public class BookAdminServiceImpl implements BookAdminService {
     }
 
     @Override
-    public Book findByIsbn(String isbn) {
-        return bookAdminRepository.findByIsbn(isbn).orElseThrow(() -> new ResourceNotFoundException("Book isbn " + isbn + " not found"));
+    public Optional<Book> findByIsbn(String isbn) {
+        return bookAdminRepository.findByIsbn(isbn);
     }
 
     @Override

@@ -5,6 +5,7 @@ import es.cesguiro.domain.admin.model.Book;
 import es.cesguiro.domain.admin.model.Genre;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BookAdminService {
     List<Book> getAll();
@@ -13,7 +14,7 @@ public interface BookAdminService {
 
     int count();
 
-    Book findByIsbn(String isbn);
+    Optional<Book> findByIsbn(String isbn);
 
     void insertAuthors(int idBook, List<Author> authors);
 

@@ -7,6 +7,8 @@ import es.cesguiro.domain.admin.model.Author;
 import es.cesguiro.domain.admin.model.Book;
 import es.cesguiro.domain.admin.model.Genre;
 import es.cesguiro.domain.admin.service.BookAdminService;
+import es.cesguiro.domain.admin.usecase.FindBookByIsbnUseCase;
+import es.cesguiro.domain.admin.usecase.GetAllBooksUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -27,28 +29,30 @@ public class BookAdminController {
     @Value("${app.pageSize.default}")
     private String defaultPageSize;
 
-    private final BookAdminService bookAdminService;
+    //private final BookAdminService bookAdminService;
+    private final GetAllBooksUseCase getAllBooksUseCase;
+    private final FindBookByIsbnUseCase findByIsbnUseCase;
 
     @GetMapping
     public ResponseEntity<PaginatedResponse<BookCollection>> getAll(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(required = false) Integer size) {
         int pageSize = (size != null) ? size : Integer.parseInt(defaultPageSize);
-        List<BookCollection> books = bookAdminService
-                .getAll(page - 1, pageSize)
+        List<BookCollection> books = getAllBooksUseCase
+                .execute(page - 1, pageSize)
                 .stream()
                 .map(BookMapper.INSTANCE::toBookCollection)
                 .toList();
 
         int total = bookAdminService.count();
 
-        PaginatedResponse<BookCollection> response = new PaginatedResponse<>(books, (int) total, page, pageSize, baseUrl + URL);
+        PaginatedResponse<BookCollection> response = new PaginatedResponse<>(books, total, page, pageSize, baseUrl + URL);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/{isbn}")
     public ResponseEntity<Book> findByIsbn(@PathVariable String isbn) {
-        Book book = bookAdminService.findByIsbn(isbn);
+        Book book = findByIsbnUseCase.execute(isbn);
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
