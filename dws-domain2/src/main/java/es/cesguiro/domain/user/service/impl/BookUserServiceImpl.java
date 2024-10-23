@@ -1,10 +1,9 @@
 package es.cesguiro.domain.user.service.impl;
 
 import es.cesguiro.common.annotation.DomainService;
-import es.cesguiro.common.exception.ResourceNotFoundException;
 import es.cesguiro.domain.user.model.Book;
-import es.cesguiro.domain.user.service.BookUserService;
 import es.cesguiro.domain.user.repository.BookUserRepository;
+import es.cesguiro.domain.user.service.BookUserService;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;

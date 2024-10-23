@@ -1,11 +1,11 @@
-package es.cesguiro.domain.user.service;
+package es.cesguiro.domain.user.repository;
 
 import es.cesguiro.domain.user.model.Book;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface BookUserService {
+public interface BookUserRepository {
     List<Book> getAll();
 
     Optional<Book> findByIsbn(String isbn);

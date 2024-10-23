@@ -47,7 +47,8 @@
         <module>dws-presentation</module>
         <module>dws-hateoas</module>
 		<module>dws-domain</module>
-	</modules>
+        <module>dws-domain2</module>
+    </modules>
 
 	<dependencies>
 		<dependency>
