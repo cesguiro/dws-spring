@@ -12,4 +12,9 @@ import lombok.RequiredArgsConstructor;
 public class BookCountUseCaseImpl implements BookCountUseCase {
 
     private final BookRepository bookRepository;
+
+    @Override
+    public int execute() {
+        return bookRepository.count();
+    }
 }

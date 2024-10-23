@@ -2,9 +2,14 @@ package es.cesguiro.domain.usecase.book.user.mapper;
 
 import es.cesguiro.domain.usecase.book.user.model.BookUser;
 import es.cesguiro.domain.model.Book;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-public class BookMapper {
+@Mapper(uses = {PublisherMapper.class, GenreMapper.class, AuthorMapper.class, CategoryMapper.class})
+public interface BookMapper {
 
-    public BookUser toBookUser(Book book) {
-    }
+    BookMapper INSTANCE = Mappers.getMapper(BookMapper.class);
+
+    BookUser toBookUser(Book book);
+
 }

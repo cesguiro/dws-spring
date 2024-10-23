@@ -1,5 +1,6 @@
 package es.cesguiro.domain.model;
 
+import es.cesguiro.common.locale.LanguageUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,4 +17,12 @@ public class Author {
     private String biographyEn;
     private int birthYear;
     private int deathYear;
+
+    public String getBiography(){
+        String language = LanguageUtils.getCurrentLanguage();
+        if ("en".equals(language)) {
+            return biographyEn;
+        }
+        return biographyEs;
+    }
 }

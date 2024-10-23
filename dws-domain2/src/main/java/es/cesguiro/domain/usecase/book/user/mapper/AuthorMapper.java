@@ -1,6 +1,6 @@
-package es.cesguiro.controller.user.webmodel.author;
+package es.cesguiro.domain.usecase.book.user.mapper;
 
-import es.cesguiro.domain.model.Author;
+import es.cesguiro.domain.usecase.book.user.model.AuthorUser;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -9,5 +9,6 @@ public interface AuthorMapper {
 
     AuthorMapper INSTANCE = Mappers.getMapper(AuthorMapper.class);
 
-    AuthorCollection toAuthorCollection(Author author);
+    AuthorUser toAuthorUser(AuthorUser AuthorUser);
+
 }

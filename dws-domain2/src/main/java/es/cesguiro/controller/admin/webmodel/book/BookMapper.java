@@ -1,6 +1,6 @@
 package es.cesguiro.controller.admin.webmodel.book;
 
-import es.cesguiro.domain.admin.model.Book;
+import es.cesguiro.domain.model.Book;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

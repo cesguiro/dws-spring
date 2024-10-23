@@ -4,9 +4,8 @@ import es.cesguiro.controller.common.PaginatedResponse;
 import es.cesguiro.controller.user.webmodel.book.BookCollection;
 import es.cesguiro.controller.user.webmodel.book.BookDetail;
 import es.cesguiro.controller.user.webmodel.book.BookMapper;
-import es.cesguiro.domain.user.usecase.book.CountUserUseCase;
-import es.cesguiro.domain.user.usecase.book.FindByIsbnUserUseCase;
-import es.cesguiro.domain.user.usecase.book.GetAllUserUseCase;
+import es.cesguiro.domain.usecase.book.common.BookCountUseCase;
+import es.cesguiro.domain.usecase.book.user.BookGetAllUserUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -27,9 +26,11 @@ public class BookUserController {
     @Value("${app.pageSize.default}")
     private String defaultPageSize;
 
-    private final GetAllUserUseCase getAllUserUseCase;
+    private final BookGetAllUserUseCase bookGetAllUserUseCase;
+    private final BookCountUseCase bookCountUseCase;
+    /*private final GetAllUserUseCase getAllUserUseCase;
     private final FindByIsbnUserUseCase findByIsbnUserUseCase;
-    private final CountUserUseCase countAdminUseCase;
+    private final CountUserUseCase countAdminUseCase;*/
 
     @GetMapping
     public ResponseEntity<PaginatedResponse<BookCollection>> getAll(
@@ -37,22 +38,22 @@ public class BookUserController {
             @RequestParam(required = false) Integer size) {
 
         int pageSize = (size != null) ? size : Integer.parseInt(defaultPageSize);
-        List<BookCollection> bookCollections = getAllUserUseCase
+        List<BookCollection> bookCollections = bookGetAllUserUseCase
                 .execute(page - 1, pageSize)
                 .stream()
                 .map(BookMapper.INSTANCE::toBookCollection)
                 .toList();
-        int total = countAdminUseCase.execute();
+        int total = bookCountUseCase.execute();
 
         PaginatedResponse<BookCollection> response = new PaginatedResponse<>(bookCollections, total, page, pageSize, baseUrl + URL);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
-    @GetMapping("/{isbn}")
+   /*@GetMapping("/{isbn}")
     public ResponseEntity<BookDetail> findByIsbn(@PathVariable String isbn) {
         BookDetail bookDetail = BookMapper.INSTANCE.toBookDetail(findByIsbnUserUseCase.execute(isbn));
         return new ResponseEntity<>(bookDetail, HttpStatus.OK);
-    }
+    }*/
 
 }
