@@ -1,6 +1,6 @@
 package es.cesguiro.domain.admin.usecase.book;
 
-public interface CountUseCase {
+public interface BookCountAdminUseCase {
 
     public int execute();
 }

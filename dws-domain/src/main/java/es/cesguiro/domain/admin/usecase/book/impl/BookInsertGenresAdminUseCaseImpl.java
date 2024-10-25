@@ -7,7 +7,7 @@ import es.cesguiro.domain.admin.model.Book;
 import es.cesguiro.domain.admin.model.Genre;
 import es.cesguiro.domain.admin.service.BookAdminService;
 import es.cesguiro.domain.admin.service.GenreAdminService;
-import es.cesguiro.domain.admin.usecase.book.InsertGenresUseCase;
+import es.cesguiro.domain.admin.usecase.book.BookInsertGenresAdminUseCase;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 @DomainUseCase
 @DomainTransactional
 @RequiredArgsConstructor
-public class InsertGenresUseCaseImpl implements InsertGenresUseCase {
+public class BookInsertGenresAdminUseCaseImpl implements BookInsertGenresAdminUseCase {
 
     private final BookAdminService bookAdminService;
     private final GenreAdminService genreAdminService;

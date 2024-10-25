@@ -6,13 +6,13 @@ import es.cesguiro.common.exception.ResourceAlreadyExistsException;
 import es.cesguiro.common.exception.ResourceNotFoundException;
 import es.cesguiro.domain.admin.model.Book;
 import es.cesguiro.domain.admin.service.*;
-import es.cesguiro.domain.admin.usecase.book.InsertUseCase;
+import es.cesguiro.domain.admin.usecase.book.BookInsertAdminUseCase;
 import lombok.RequiredArgsConstructor;
 
 @DomainUseCase
 @DomainTransactional
 @RequiredArgsConstructor
-public class InsertUseCaseImpl implements InsertUseCase {
+public class BookInsertAdminUseCaseImpl implements BookInsertAdminUseCase {
 
     private final BookAdminService bookAdminService;
     private final AuthorAdminService authorAdminService;

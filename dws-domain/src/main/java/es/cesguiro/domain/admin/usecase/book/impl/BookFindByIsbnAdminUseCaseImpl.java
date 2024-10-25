@@ -8,15 +8,14 @@ import es.cesguiro.domain.admin.model.Genre;
 import es.cesguiro.domain.admin.service.AuthorAdminService;
 import es.cesguiro.domain.admin.service.BookAdminService;
 import es.cesguiro.domain.admin.service.GenreAdminService;
-import es.cesguiro.domain.admin.usecase.book.FindByIsbnUseCase;
-import es.cesguiro.domain.admin.usecase.book.GetAllUseCase;
+import es.cesguiro.domain.admin.usecase.book.BookFindByIsbnAdminUseCase;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @DomainUseCase
 @RequiredArgsConstructor
-public class FindByIsbnUseCaseImpl implements FindByIsbnUseCase {
+public class BookFindByIsbnAdminUseCaseImpl implements BookFindByIsbnAdminUseCase {
 
     private final BookAdminService bookAdminService;
     private final GenreAdminService genreAdminService;

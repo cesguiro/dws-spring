@@ -4,7 +4,7 @@ import es.cesguiro.domain.admin.model.Genre;
 
 import java.util.List;
 
-public interface InsertGenresUseCase {
+public interface BookInsertGenresAdminUseCase {
 
     void execute(int id, List<Genre> genres);
 }

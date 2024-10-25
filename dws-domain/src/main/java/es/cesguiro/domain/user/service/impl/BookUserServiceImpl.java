@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @DomainService
 @RequiredArgsConstructor
@@ -22,8 +23,8 @@ public class BookUserServiceImpl implements BookUserService {
     }
 
     @Override
-    public Book findByIsbn(String isbn) {
-        return bookUserRepository.findByIsbn(isbn).orElseThrow(() -> new ResourceNotFoundException("Book isbn " + isbn + " not found"));
+    public Optional<Book> findByIsbn(String isbn) {
+        return bookUserRepository.findByIsbn(isbn);
     }
 
     @Override
