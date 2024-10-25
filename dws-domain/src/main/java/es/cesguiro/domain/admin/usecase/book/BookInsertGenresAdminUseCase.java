@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface BookInsertGenresAdminUseCase {
 
+
     void execute(int id, List<Genre> genres);
 }

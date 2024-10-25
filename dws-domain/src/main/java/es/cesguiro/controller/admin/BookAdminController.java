@@ -26,7 +26,7 @@ public class BookAdminController {
 
     @Value("${app.pageSize.default}")
     private String defaultPageSize;
-
+    
     private final BookGetAllAdminUseCase bookGetAllAdminUseCase;
     private final BookFindByIsbnAdminUseCase bookFindByIsbnAdminUseCase;
     private final BookCountAdminUseCase bookCountAdminUseCase;
@@ -34,18 +34,21 @@ public class BookAdminController {
     private final BookInsertGenresAdminUseCase bookInsertGenresAdminUseCase;
     private final BookInsertAdminUseCase bookInsertAdminUseCase;
 
+
     @GetMapping
     public ResponseEntity<PaginatedResponse<BookCollection>> getAll(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(required = false) Integer size) {
         int pageSize = (size != null) ? size : Integer.parseInt(defaultPageSize);
+
         List<BookCollection> books = bookGetAllAdminUseCase
                 .execute(page - 1, pageSize)
                 .stream()
                 .map(BookMapper.INSTANCE::toBookCollection)
                 .toList();
-
+        
         int total = bookCountAdminUseCase.execute();
+
 
         PaginatedResponse<BookCollection> response = new PaginatedResponse<>(books, total, page, pageSize, baseUrl + URL);
         return new ResponseEntity<>(response, HttpStatus.OK);

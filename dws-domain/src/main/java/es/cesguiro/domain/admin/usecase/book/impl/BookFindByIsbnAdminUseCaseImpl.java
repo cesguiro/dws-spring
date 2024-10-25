@@ -17,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookFindByIsbnAdminUseCaseImpl implements BookFindByIsbnAdminUseCase {
 
+
     private final BookAdminService bookAdminService;
     private final GenreAdminService genreAdminService;
     private final AuthorAdminService authorAdminService;

@@ -4,5 +4,6 @@ import es.cesguiro.domain.admin.model.Book;
 
 public interface BookFindByIsbnAdminUseCase {
 
+
     Book execute(String isbn);
 }

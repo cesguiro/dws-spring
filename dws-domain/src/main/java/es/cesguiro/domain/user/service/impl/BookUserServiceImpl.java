@@ -6,7 +6,6 @@ import es.cesguiro.domain.user.model.Book;
 import es.cesguiro.domain.user.service.BookUserService;
 import es.cesguiro.domain.user.repository.BookUserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
