@@ -25,9 +25,7 @@ public class Book {
     private String cover;
     private Publisher publisher;
     private Category category;
-    @Singular
     private List<Genre> genres;
-    @Singular
     private List<Author> authors;
 
     public String getTitle() {

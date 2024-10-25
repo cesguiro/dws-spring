@@ -1,8 +1,8 @@
 package es.cesguiro.domain.admin.service.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import es.cesguiro.common.annotation.DomainService;
 import es.cesguiro.common.exception.ResourceAlreadyExistsException;
-import es.cesguiro.common.exception.ResourceNotFoundException;
 import es.cesguiro.domain.admin.model.Author;
 import es.cesguiro.domain.admin.model.Book;
 import es.cesguiro.domain.admin.model.Genre;
