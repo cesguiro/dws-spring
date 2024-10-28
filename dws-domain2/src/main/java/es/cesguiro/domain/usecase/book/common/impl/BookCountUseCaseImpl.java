@@ -2,7 +2,7 @@ package es.cesguiro.domain.usecase.book.common.impl;
 
 import es.cesguiro.common.annotation.DomainTransactional;
 import es.cesguiro.common.annotation.DomainUseCase;
-import es.cesguiro.domain.repository.BookRepository;
+import es.cesguiro.domain.service.BookService;
 import es.cesguiro.domain.usecase.book.common.BookCountUseCase;
 import lombok.RequiredArgsConstructor;
 
@@ -11,10 +11,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BookCountUseCaseImpl implements BookCountUseCase {
 
-    private final BookRepository bookRepository;
+    private final BookService bookService;
 
     @Override
     public int execute() {
-        return bookRepository.count();
+        return bookService.count();
     }
 }
