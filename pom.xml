@@ -48,6 +48,7 @@
         <module>dws-hateoas</module>
 		<module>dws-domain</module>
         <module>dws-domain2</module>
+        <module>dws-persistence</module>
     </modules>
 
 	<dependencies>
