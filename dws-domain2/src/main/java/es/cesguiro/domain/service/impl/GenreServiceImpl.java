@@ -21,6 +21,11 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
+    public List<Genre> getByIsbnBook(String isbn) {
+        return genreRepository.getByIsbnBook(isbn);
+    }
+
+    @Override
     public List<Genre> findAllById(List<Genre> genres) {
         List<Genre> foundGenres =  genreRepository.findAllById(
                 genres

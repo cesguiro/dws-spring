@@ -21,6 +21,11 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    public List<Author> getByIsbnBook(String isbn) {
+        return authorRepository.getByIsbnBook(isbn);
+    }
+
+    @Override
     public List<Author> findAllById(List<Author> authors) {
         List<Author> foundAuthors =  authorRepository.findAllById(
                 authors

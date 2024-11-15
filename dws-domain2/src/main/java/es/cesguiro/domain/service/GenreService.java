@@ -8,5 +8,7 @@ public interface GenreService {
 
     List<Genre> getByIdBook(long idBook);
 
+    List<Genre> getByIsbnBook(String isbn);
+
     List<Genre> findAllById(List<Genre> genres);
 }
