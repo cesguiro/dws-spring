@@ -49,6 +49,7 @@
 		<module>dws-domain</module>
         <module>dws-domain2</module>
         <module>dws-persistence</module>
+        <module>dws-jpa</module>
     </modules>
 
 	<dependencies>
