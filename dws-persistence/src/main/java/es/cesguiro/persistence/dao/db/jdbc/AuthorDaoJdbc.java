@@ -1,6 +1,7 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
 import es.cesguiro.domain.model.Author;
+import es.cesguiro.domain.model.Book;
 import es.cesguiro.persistence.dao.db.AuthorDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.AuthorRowMapper;
 import lombok.RequiredArgsConstructor;
@@ -89,5 +90,11 @@ public class AuthorDaoJdbc implements AuthorDaoDb {
     @Override
     public int count() {
         return 0;
+    }
+
+    @Override
+    public Author save(Author author) {
+        //TODO: Implementar guardar un autor
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
+import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Genre;
 import es.cesguiro.persistence.dao.db.GenreDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.GenreRowMapper;
@@ -89,5 +90,11 @@ public class GenreDaoJdbc implements GenreDaoDb {
     public int count() {
         //TODO: Implementar contar los generos
         return 0;
+    }
+
+    @Override
+    public Genre save(Genre genre) {
+        //TODO: Implementar guardar un genero
+        return null;
     }
 }

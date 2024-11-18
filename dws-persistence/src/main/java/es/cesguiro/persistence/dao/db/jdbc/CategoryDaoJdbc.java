@@ -1,5 +1,6 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
+import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Category;
 import es.cesguiro.persistence.dao.db.CategoryDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.CategoryRowMapper;
@@ -60,5 +61,11 @@ public class CategoryDaoJdbc implements CategoryDaoDb {
     @Override
     public int count() {
         return 0;
+    }
+
+    @Override
+    public Category save(Category category) {
+        //TODO: Implementar guardar una categoria
+        return null;
     }
 }

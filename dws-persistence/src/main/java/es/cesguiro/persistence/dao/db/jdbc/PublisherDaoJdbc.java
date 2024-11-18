@@ -1,5 +1,6 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
+import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Publisher;
 import es.cesguiro.persistence.dao.db.PublisherDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.PublisherRowMapper;
@@ -61,5 +62,10 @@ public class PublisherDaoJdbc implements PublisherDaoDb {
     @Override
     public int count() {
         return 0;
+    }
+
+    @Override
+    public void save(Book book) {
+        //TODO: Implementar guardar un editor
     }
 }

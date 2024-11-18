@@ -1,5 +1,7 @@
 package es.cesguiro.persistence.dao.db;
 
+import es.cesguiro.domain.model.Book;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -12,5 +14,5 @@ public interface GenericDaoDb<T> {
     void update(T t);
     void delete(long id);
     int count();
-
+    T save(T t);
 }
