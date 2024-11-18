@@ -93,4 +93,10 @@ public class GenreDaoJdbc implements GenreDaoDb {
         //TODO: Implementar contar los generos
         return 0;
     }
+
+    @Override
+    public Genre save(Genre genre) {
+        genre.setId(this.insert(genre));
+        return genre;
+    }
 }

@@ -48,6 +48,22 @@ public class BookDaoJdbc implements BookDaoDb {
     }
 
     @Override
+    public Book save(Book book) {
+        //Si el id existe, actualizar, si no, instalar
+        if(book.getId() != null) {
+            this.update(book);
+        } else {
+            long id = this.insert(book);
+            book.setId(id);
+        }
+        this.deleteAuthors(book.getId());
+        this.insertAuthors(book.getId(), book.getAuthors());
+        this.deleteGenres(book.getId());
+        this.insertGenres(book.getId(), book.getGenres());
+        return book;
+    }
+
+    @Override
     public Optional<Book> findByIsbn(String isbn) {
         String sql = """
                 SELECT * FROM books

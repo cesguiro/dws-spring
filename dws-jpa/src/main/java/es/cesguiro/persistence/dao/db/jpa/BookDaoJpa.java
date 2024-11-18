@@ -4,6 +4,7 @@ import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Genre;
 import es.cesguiro.persistence.dao.db.BookDaoDb;
+import es.cesguiro.persistence.dao.db.jpa.entity.BookEntity;
 import es.cesguiro.persistence.dao.db.jpa.mapper.AuthorJpaMapper;
 import es.cesguiro.persistence.dao.db.jpa.mapper.BookJpaMapper;
 import es.cesguiro.persistence.dao.db.jpa.mapper.GenreJpaMapper;
@@ -104,5 +105,11 @@ public class BookDaoJpa implements BookDaoDb {
     @Override
     public int count() {
         return (int) bookJpaRepository.count();
+    }
+
+    @Override
+    public Book save(Book book) {
+        BookEntity bookEntity = BookJpaMapper.INSTANCE.toBookEntity(book);
+        return BookJpaMapper.INSTANCE.toBook(bookJpaRepository.save(bookEntity));
     }
 }

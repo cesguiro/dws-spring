@@ -58,11 +58,16 @@ public class PublisherDaoJdbc implements PublisherDaoDb {
 
     @Override
     public void delete(long id) {
-
     }
 
     @Override
     public int count() {
         return 0;
+    }
+
+    @Override
+    public Publisher save(Publisher publisher) {
+        publisher.setId(this.insert(publisher));
+        return publisher;
     }
 }

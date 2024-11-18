@@ -93,4 +93,10 @@ public class AuthorDaoJdbc implements AuthorDaoDb {
     public int count() {
         return 0;
     }
+
+    @Override
+    public Author save(Author author) {
+        author.setId(this.insert(author));
+        return author;
+    }
 }
