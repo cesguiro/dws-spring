@@ -62,4 +62,10 @@ public class PublisherDaoJdbc implements PublisherDaoDb {
     public int count() {
         return 0;
     }
+
+    @Override
+    public Publisher save(Publisher publisher) {
+        //TODO: Implementar guardar un autor
+        return null;
+    }
 }

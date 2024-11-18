@@ -61,4 +61,10 @@ public class CategoryDaoJdbc implements CategoryDaoDb {
     public int count() {
         return 0;
     }
+
+    @Override
+    public Category save(Category category) {
+        //TODO: Implementar guardar una categoria
+        return null;
+    }
 }

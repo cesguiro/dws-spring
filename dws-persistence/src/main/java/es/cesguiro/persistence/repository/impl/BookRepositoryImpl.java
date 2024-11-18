@@ -52,17 +52,7 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public void save(Book book) {
-        //Si el id existe, actualizar, si no, instalar
-        if(book.getId() != null) {
-            bookDaoJdbc.update(book);
-        } else {
-            long id = bookDaoJdbc.insert(book);
-            book.setId(id);
-        }
-        bookDaoJdbc.deleteAuthors(book.getId());
-        bookDaoJdbc.insertAuthors(book.getId(), book.getAuthors());
-        bookDaoJdbc.deleteGenres(book.getId());
-        bookDaoJdbc.insertGenres(book.getId(), book.getGenres());
+        bookDaoJdbc.save(book);
     }
 
 }

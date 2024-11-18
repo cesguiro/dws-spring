@@ -12,5 +12,5 @@ public interface GenericDaoDb<T> {
     void update(T t);
     void delete(long id);
     int count();
-
+    T save(T t);
 }

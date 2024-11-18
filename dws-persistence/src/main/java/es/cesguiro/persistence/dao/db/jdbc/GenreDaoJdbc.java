@@ -90,4 +90,10 @@ public class GenreDaoJdbc implements GenreDaoDb {
         //TODO: Implementar contar los generos
         return 0;
     }
+
+    @Override
+    public Genre save(Genre genre) {
+        //TODO: Implementar guardar un genero
+        return null;
+    }
 }

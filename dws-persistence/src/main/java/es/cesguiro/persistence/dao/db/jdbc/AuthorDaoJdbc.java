@@ -90,4 +90,10 @@ public class AuthorDaoJdbc implements AuthorDaoDb {
     public int count() {
         return 0;
     }
+
+    @Override
+    public Author save(Author author) {
+        //TODO: Implementar guardar un autor
+        return null;
+    }
 }
