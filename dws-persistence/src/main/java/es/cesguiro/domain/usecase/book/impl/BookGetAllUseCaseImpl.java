@@ -18,6 +18,6 @@ public class BookGetAllUseCaseImpl implements BookGetAllUseCase {
 
     @Override
     public List<Book> execute(int page, int pageSize) {
-        return bookService.getAll();
+        return bookService.getAll(page, pageSize);
     }
 }
