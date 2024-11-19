@@ -65,7 +65,8 @@ public class PublisherDaoJdbc implements PublisherDaoDb {
     }
 
     @Override
-    public void save(Book book) {
-        //TODO: Implementar guardar un editor
+    public Publisher save(Publisher publisher) {
+        return null;
     }
+
 }

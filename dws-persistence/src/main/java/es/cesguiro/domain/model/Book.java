@@ -1,5 +1,6 @@
 package es.cesguiro.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import es.cesguiro.common.locale.LanguageUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
