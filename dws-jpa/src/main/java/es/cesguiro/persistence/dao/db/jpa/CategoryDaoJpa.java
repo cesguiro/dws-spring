@@ -65,4 +65,11 @@ public class CategoryDaoJpa implements CategoryDaoDb {
     public int count() {
         return (int) categoryJpaRepository.count();
     }
+
+    @Override
+    public Category save(Category category) {
+        return CategoryJpaMapper.INSTANCE.toCategory(
+                categoryJpaRepository.save(CategoryJpaMapper.INSTANCE.toCategoryEntity(category))
+        );
+    }
 }

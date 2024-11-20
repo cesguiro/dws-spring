@@ -65,4 +65,11 @@ public class PublisherDaoJpa implements PublisherDaoDb {
     public int count() {
         return (int) publisherJpaRepository.count();
     }
+
+    @Override
+    public Publisher save(Publisher publisher) {
+        return PublisherJpaMapper.INSTANCE.toPublisher(
+                publisherJpaRepository.save(PublisherJpaMapper.INSTANCE.toPublisherEntity(publisher))
+        );
+    }
 }

@@ -20,7 +20,7 @@ public class AuthorEntity {
     @Column(name = "biography_en")
     private String biographyEn;
     @Column(name = "birth_year")
-    private int birthYear;
+    private Integer birthYear;
     @Column(name = "death_year")
-    private int deathYear;
+    private Integer deathYear;
 }

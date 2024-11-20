@@ -21,5 +21,4 @@ public interface AuthorJpaRepository extends JpaRepository<AuthorEntity, Long> {
             "AND ba.book_id = :id)", nativeQuery = true)
     List<AuthorEntity> findByBooksId(@Param("id") Long id);
 
-    List<AuthorEntity> findByBookEntityByIsbn(String isbn);
 }

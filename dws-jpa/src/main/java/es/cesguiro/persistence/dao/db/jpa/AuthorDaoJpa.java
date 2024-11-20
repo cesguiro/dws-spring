@@ -92,4 +92,11 @@ public class AuthorDaoJpa implements AuthorDaoDb {
     public int count() {
         return (int) authorJpaRepository.count();
     }
+
+    @Override
+    public Author save(Author author) {
+        return AuthorJpaMapper.INSTANCE.toAuthor(
+                authorJpaRepository.save(AuthorJpaMapper.INSTANCE.toAuthorEntity(author))
+        );
+    }
 }

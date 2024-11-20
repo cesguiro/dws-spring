@@ -91,4 +91,11 @@ public class GenreDaoJpa implements GenreDaoDb {
     public int count() {
         return (int) genreJpaRepository.count();
     }
+
+    @Override
+    public Genre save(Genre genre) {
+        return GenreJpaMapper.INSTANCE.toGenre(
+                genreJpaRepository.save(GenreJpaMapper.INSTANCE.toGenreEntity(genre))
+        );
+    }
 }
