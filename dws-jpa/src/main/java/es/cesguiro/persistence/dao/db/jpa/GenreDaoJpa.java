@@ -1,11 +1,13 @@
 package es.cesguiro.persistence.dao.db.jpa;
 
+import es.cesguiro.common.PaginatedResponse;
 import es.cesguiro.domain.model.Genre;
 import es.cesguiro.persistence.dao.db.GenreDaoDb;
 import es.cesguiro.persistence.dao.db.jpa.entity.GenreEntity;
 import es.cesguiro.persistence.dao.db.jpa.mapper.GenreJpaMapper;
 import es.cesguiro.persistence.dao.db.jpa.repository.GenreJpaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -56,12 +58,18 @@ public class GenreDaoJpa implements GenreDaoDb {
     }
 
     @Override
-    public List<Genre> getAll(int page, int size) {
+    public PaginatedResponse<Genre> getAll(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return genreJpaRepository.findAll(pageable)
-                .stream()
-                .map(GenreJpaMapper.INSTANCE::toGenre)
-                .toList();
+        Page<GenreEntity> genrePage = genreJpaRepository.findAll(pageable);
+        return new PaginatedResponse<>(
+                genreJpaRepository.findAll(pageable)
+                        .stream()
+                        .map(GenreJpaMapper.INSTANCE::toGenre)
+                        .toList(),
+                genrePage.getNumberOfElements(),
+                genrePage.getNumber() + 1,
+                genrePage.getSize()
+        );
     }
 
     @Override
@@ -88,8 +96,8 @@ public class GenreDaoJpa implements GenreDaoDb {
     }
 
     @Override
-    public int count() {
-        return (int) genreJpaRepository.count();
+    public long count() {
+        return genreJpaRepository.count();
     }
 
     @Override

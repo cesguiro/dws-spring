@@ -1,6 +1,7 @@
 package es.cesguiro.controller.user;
 
-import es.cesguiro.controller.common.PaginatedResponse;
+import es.cesguiro.common.PaginatedResponse;
+import es.cesguiro.config.PropertiesConfig;
 import es.cesguiro.controller.user.webmodel.book.BookCollection;
 import es.cesguiro.controller.user.webmodel.book.BookDetail;
 import es.cesguiro.controller.user.webmodel.book.BookMapper;
@@ -22,8 +23,8 @@ import java.util.List;
 public class BookUserController {
 
     public static final String URL = "/api/books";
-    @Value("${app.base.url}")
-    private String baseUrl;
+    /*@Value("${app.base.url}")
+    private String baseUrl;*/
 
     @Value("${app.pageSize.default}")
     private String defaultPageSize;
@@ -38,8 +39,18 @@ public class BookUserController {
             @RequestParam(required = false) Integer size) {
 
         int pageSize = (size != null) ? size : Integer.parseInt(defaultPageSize);
-        PaginatedResponse<Book> books = bookGetAllUseCase.execute(page - 1, pageSize);
-        List<BookCollection> bookCollections = bookGetAllUseCase
+        PaginatedResponse<Book> paginatedResponse = bookGetAllUseCase.execute(page - 1, pageSize);
+        PaginatedResponse<BookCollection> response = new PaginatedResponse<>(
+                paginatedResponse
+                        .getData()
+                        .stream()
+                        .map(BookMapper.INSTANCE::toBookCollection)
+                        .toList(),
+                paginatedResponse.getTotal(), paginatedResponse.getCurrentPage(), paginatedResponse.getPageSize());
+        //paginatedResponse.getData().forEach(BookMapper.INSTANCE::toBookCollection);
+        response.createPaginatedLinks(PropertiesConfig.getSetting("app.base.url") + URL);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+        /*List<BookCollection> bookCollections = bookGetAllUseCase
                 .execute(page - 1, pageSize)
                 .getContent()
                 .stream()
@@ -49,7 +60,8 @@ public class BookUserController {
         //int total = 100;
 
         PaginatedResponse<BookCollection> response = new PaginatedResponse<>(bookCollections, total, page, pageSize, baseUrl + URL);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);*/
+
     }
 
 

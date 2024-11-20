@@ -1,6 +1,6 @@
 package es.cesguiro.domain.service;
 
-import es.cesguiro.common.PagedResponse;
+import es.cesguiro.common.PaginatedResponse;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Genre;
@@ -12,9 +12,9 @@ public interface BookService {
 
     List<Book> getAll();
 
-    PagedResponse<Book> getAll(int page, int size);
+    PaginatedResponse<Book> getAll(int page, int size);
 
-    int count();
+    long count();
 
     Optional<Book> findByIsbn(String isbn);
 

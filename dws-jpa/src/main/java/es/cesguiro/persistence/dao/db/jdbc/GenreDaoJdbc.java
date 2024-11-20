@@ -1,5 +1,6 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
+import es.cesguiro.common.PaginatedResponse;
 import es.cesguiro.domain.model.Genre;
 import es.cesguiro.persistence.dao.db.GenreDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.GenreRowMapper;
@@ -8,7 +9,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
 import java.util.List;
@@ -61,9 +61,9 @@ public class GenreDaoJdbc implements GenreDaoDb {
     }
 
     @Override
-    public List<Genre> getAll(int page, int size) {
+    public PaginatedResponse<Genre> getAll(int page, int size) {
         //TODO: Implementar obtener todas los generos paginados
-        return List.of();
+        return new PaginatedResponse<>(List.of(), 0, page, size);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class GenreDaoJdbc implements GenreDaoDb {
     }
 
     @Override
-    public int count() {
+    public long count() {
         //TODO: Implementar contar los generos
         return 0;
     }

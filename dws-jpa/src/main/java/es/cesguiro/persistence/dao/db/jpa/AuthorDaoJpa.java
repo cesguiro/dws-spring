@@ -1,14 +1,15 @@
 package es.cesguiro.persistence.dao.db.jpa;
 
+import es.cesguiro.common.PaginatedResponse;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.persistence.dao.db.AuthorDaoDb;
 import es.cesguiro.persistence.dao.db.jpa.entity.AuthorEntity;
 import es.cesguiro.persistence.dao.db.jpa.mapper.AuthorJpaMapper;
 import es.cesguiro.persistence.dao.db.jpa.repository.AuthorJpaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -57,12 +58,22 @@ public class AuthorDaoJpa implements AuthorDaoDb {
     }
 
     @Override
-    public List<Author> getAll(int page, int size) {
+    public PaginatedResponse<Author> getAll(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return authorJpaRepository.findAll(pageable)
+        Page<AuthorEntity> authorEntities = authorJpaRepository.findAll(pageable);
+        return new PaginatedResponse<>(
+                authorEntities.getContent().stream()
+                        .map(AuthorJpaMapper.INSTANCE::toAuthor)
+                        .toList(),
+                authorEntities.getNumberOfElements(),
+                authorEntities.getNumber() + 1,
+                authorEntities.getSize()
+
+        );
+        /*return authorJpaRepository.findAll(pageable)
                 .stream()
                 .map(AuthorJpaMapper.INSTANCE::toAuthor)
-                .toList();
+                .toList();*/
     }
 
     @Override
@@ -89,8 +100,8 @@ public class AuthorDaoJpa implements AuthorDaoDb {
     }
 
     @Override
-    public int count() {
-        return (int) authorJpaRepository.count();
+    public long count() {
+        return authorJpaRepository.count();
     }
 
     @Override

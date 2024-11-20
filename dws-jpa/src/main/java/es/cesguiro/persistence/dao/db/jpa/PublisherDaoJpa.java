@@ -1,11 +1,13 @@
 package es.cesguiro.persistence.dao.db.jpa;
 
+import es.cesguiro.common.PaginatedResponse;
 import es.cesguiro.domain.model.Publisher;
 import es.cesguiro.persistence.dao.db.PublisherDaoDb;
 import es.cesguiro.persistence.dao.db.jpa.entity.PublisherEntity;
 import es.cesguiro.persistence.dao.db.jpa.mapper.PublisherJpaMapper;
 import es.cesguiro.persistence.dao.db.jpa.repository.PublisherJpaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -29,13 +31,19 @@ public class PublisherDaoJpa implements PublisherDaoDb {
     }
 
     @Override
-    public List<Publisher> getAll(int page, int size) {
+    public PaginatedResponse<Publisher> getAll(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
+        Page<PublisherEntity> publisherPage = publisherJpaRepository.findAll(pageable);
+        return new PaginatedResponse<>(
+                publisherJpaRepository.findAll(pageable)
+                        .stream()
+                        .map(PublisherJpaMapper.INSTANCE::toPublisher)
+                        .toList(),
+                publisherPage.getNumberOfElements(),
+                publisherPage.getNumber() + 1,
+                publisherPage.getSize()
+        );
 
-        return publisherJpaRepository.findAll(pageable)
-                .stream()
-                .map(PublisherJpaMapper.INSTANCE::toPublisher)
-                .toList();
     }
 
     @Override
@@ -62,8 +70,8 @@ public class PublisherDaoJpa implements PublisherDaoDb {
     }
 
     @Override
-    public int count() {
-        return (int) publisherJpaRepository.count();
+    public long count() {
+        return publisherJpaRepository.count();
     }
 
     @Override

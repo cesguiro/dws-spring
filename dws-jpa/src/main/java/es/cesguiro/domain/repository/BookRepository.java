@@ -1,6 +1,6 @@
 package es.cesguiro.domain.repository;
 
-import es.cesguiro.common.PagedResponse;
+import es.cesguiro.common.PaginatedResponse;
 import es.cesguiro.domain.model.Book;
 
 import java.util.List;
@@ -10,9 +10,9 @@ public interface BookRepository {
 
     List<Book> getAll();
 
-    PagedResponse<Book> getAll(int page, int size);
+    PaginatedResponse<Book> getAll(int page, int size);
 
-    int count();
+    long count();
 
     Optional<Book> findByIsbn(String isbn);
 

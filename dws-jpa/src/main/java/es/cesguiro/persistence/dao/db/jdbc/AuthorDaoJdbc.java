@@ -1,13 +1,12 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
+import es.cesguiro.common.PaginatedResponse;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.persistence.dao.db.AuthorDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.AuthorRowMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
@@ -62,9 +61,9 @@ public class AuthorDaoJdbc implements AuthorDaoDb {
     }
 
     @Override
-    public List<Author> getAll(int page, int size) {
+    public PaginatedResponse<Author> getAll(int page, int size) {
         //TODO: Implementar obtener todos los autores paginados
-        return List.of();
+        return new PaginatedResponse<>(List.of(), 0, page, size);
     }
 
     @Override
@@ -90,7 +89,7 @@ public class AuthorDaoJdbc implements AuthorDaoDb {
     }
 
     @Override
-    public int count() {
+    public long count() {
         return 0;
     }
 

@@ -14,7 +14,7 @@ public class BookCountUseCaseImpl implements BookCountUseCase {
     private final BookService bookService;
 
     @Override
-    public int execute() {
+    public long execute() {
         return bookService.count();
     }
 }

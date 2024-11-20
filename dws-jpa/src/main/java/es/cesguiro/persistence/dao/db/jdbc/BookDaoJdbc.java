@@ -1,6 +1,6 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
-import es.cesguiro.common.PagedResponse;
+import es.cesguiro.common.PaginatedResponse;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Genre;
@@ -31,22 +31,22 @@ public class BookDaoJdbc implements BookDaoDb {
     }
 
     @Override
-    public PagedResponse<Book> getAll(int page, int size) {
+    public PaginatedResponse<Book> getAll(int page, int size) {
         String sql = """
                         SELECT * FROM books
                         LIMIT ? OFFSET ?
                      """;
         List<Book> books = jdbcTemplate.query(sql, new BookRowMapper(), size, page * size);
-        int total = this.count();
-        return new PagedResponse<>(books, total);
+        long total = this.count();
+        return new PaginatedResponse<>(books, total, page, size);
     }
 
     @Override
-    public int count() {
+    public long count() {
         String sql = """
                         SELECT COUNT(*) FROM books
                      """;
-        return jdbcTemplate.queryForObject(sql, Integer.class);
+        return jdbcTemplate.queryForObject(sql, Long.class);
     }
 
     @Override

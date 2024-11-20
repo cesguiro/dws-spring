@@ -1,5 +1,6 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
+import es.cesguiro.common.PaginatedResponse;
 import es.cesguiro.domain.model.Category;
 import es.cesguiro.persistence.dao.db.CategoryDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.CategoryRowMapper;
@@ -7,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,9 +39,9 @@ public class CategoryDaoJdbc implements CategoryDaoDb {
     }
 
     @Override
-    public List<Category> getAll(int page, int size) {
+    public PaginatedResponse<Category> getAll(int page, int size) {
         //TODO: Implementar obtener todas las categorias paginadas
-        return List.of();
+        return new PaginatedResponse<>(List.of(), 0, page, size);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class CategoryDaoJdbc implements CategoryDaoDb {
     }
 
     @Override
-    public int count() {
+    public long count() {
         return 0;
     }
 

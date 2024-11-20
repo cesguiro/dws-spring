@@ -1,6 +1,6 @@
 package es.cesguiro.persistence.dao.db;
 
-import es.cesguiro.common.PagedResponse;
+import es.cesguiro.common.PaginatedResponse;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,12 +8,12 @@ import java.util.Optional;
 public interface GenericDaoDb<T> {
 
     List<T> getAll();
-    PagedResponse<T> getAll(int page, int size);
+    PaginatedResponse<T> getAll(int page, int size);
     Optional<T> findById(long id);
     long insert(T t);
     void update(T t);
     void delete(long id);
-    int count();
+    long count();
     T save(T t);
 
 }

@@ -1,8 +1,9 @@
 package es.cesguiro.controller.admin;
 
+import es.cesguiro.config.PropertiesConfig;
 import es.cesguiro.controller.admin.webmodel.book.BookCollection;
+import es.cesguiro.common.PaginatedResponse;
 import es.cesguiro.controller.admin.webmodel.book.BookMapper;
-import es.cesguiro.controller.common.PaginatedResponse;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Genre;
@@ -24,8 +25,8 @@ import java.util.List;
 public class BookAdminController {
 
     public static final String URL = "/api/admin/books";
-    @Value("${app.base.url}")
-    private String baseUrl;
+    /*@Value("${app.base.url}")
+    private String baseUrl;*/
 
     @Value("${app.pageSize.default}")
     private String defaultPageSize;
@@ -41,7 +42,22 @@ public class BookAdminController {
     public ResponseEntity<PaginatedResponse<BookCollection>> getAll(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(required = false) Integer size) {
+
         int pageSize = (size != null) ? size : Integer.parseInt(defaultPageSize);
+        PaginatedResponse<Book> paginatedResponse = bookGetAllUseCase.execute(page - 1, pageSize);
+        PaginatedResponse<BookCollection> response = new PaginatedResponse<>(
+                paginatedResponse
+                        .getData()
+                        .stream()
+                        .map(BookMapper.INSTANCE::toBookCollection)
+                        .toList(),
+                paginatedResponse.getTotal(), paginatedResponse.getCurrentPage(), paginatedResponse.getPageSize());
+        //paginatedResponse.getData().forEach(BookMapper.INSTANCE::toBookCollection);
+        response.createPaginatedLinks(PropertiesConfig.getSetting("app.base.url") + URL);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
+
+        /*int pageSize = (size != null) ? size : Integer.parseInt(defaultPageSize);
         List<BookCollection> books = bookGetAllUseCase
                 .execute(page - 1, pageSize)
                 .stream()
@@ -51,7 +67,7 @@ public class BookAdminController {
         int total = bookCountUseCase.execute();
 
         PaginatedResponse<BookCollection> response = new PaginatedResponse<>(books, total, page, pageSize, baseUrl + URL);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);*/
     }
 
     @GetMapping("/{isbn}")

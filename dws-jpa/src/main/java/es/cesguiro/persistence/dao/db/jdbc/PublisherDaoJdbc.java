@@ -1,5 +1,6 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
+import es.cesguiro.common.PaginatedResponse;
 import es.cesguiro.domain.model.Publisher;
 import es.cesguiro.persistence.dao.db.PublisherDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.PublisherRowMapper;
@@ -7,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,8 +42,8 @@ public class PublisherDaoJdbc implements PublisherDaoDb {
     }
 
     @Override
-    public List<Publisher> getAll(int page, int size) {
-        return List.of();
+    public PaginatedResponse<Publisher> getAll(int page, int size) {
+        return new PaginatedResponse<>(List.of(), 0, page, size);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class PublisherDaoJdbc implements PublisherDaoDb {
     }
 
     @Override
-    public int count() {
+    public long count() {
         return 0;
     }
 
