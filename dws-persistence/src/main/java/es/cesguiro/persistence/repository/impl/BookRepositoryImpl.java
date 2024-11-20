@@ -14,23 +14,23 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BookRepositoryImpl implements BookRepository {
 
-    private final BookDaoDb bookDaoJdbc;
+    private final BookDaoDb bookDaoDb;
     private final BookDaoCache bookDaoCache;
 
 
     @Override
     public List<Book> getAll() {
-        return bookDaoJdbc.getAll();
+        return bookDaoDb.getAll();
     }
 
     @Override
     public List<Book> getAll(int page, int size) {
-        return bookDaoJdbc.getAll(page, size);
+        return bookDaoDb.getAll(page, size);
     }
 
     @Override
     public int count() {
-        return bookDaoJdbc.count();
+        return bookDaoDb.count();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class BookRepositoryImpl implements BookRepository {
         return bookDaoCache.findByIsbn(isbn).or(
                 () -> {
                     System.out.println("Retrieved from db: " + isbn);
-                    Optional<Book> book = bookDaoJdbc.findByIsbn(isbn);
+                    Optional<Book> book = bookDaoDb.findByIsbn(isbn);
                     book.ifPresent(bookDaoCache::save);
                     return book;
                 }
@@ -47,12 +47,12 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public Optional<Book> findById(long id) {
-        return bookDaoJdbc.findById(id);
+        return bookDaoDb.findById(id);
     }
 
     @Override
     public void save(Book book) {
-        bookDaoJdbc.save(book);
+        bookDaoDb.save(book);
     }
 
 }

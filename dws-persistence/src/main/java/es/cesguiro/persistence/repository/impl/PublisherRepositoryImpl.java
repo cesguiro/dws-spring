@@ -12,10 +12,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PublisherRepositoryImpl implements PublisherRepository {
 
-    private final PublisherDaoDb publisherDao;
+    private final PublisherDaoDb publisherDaoDb;
 
     @Override
     public Optional<Publisher> findById(Long id) {
-        return publisherDao.findById(id);
+        return publisherDaoDb.findById(id);
     }
 }

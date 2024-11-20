@@ -12,20 +12,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthorRepositoryImpl implements AuthorRepository {
 
-    private final AuthorDaoDb authorDao;
+    private final AuthorDaoDb authorDaoDb;
 
     @Override
     public List<Author> getByIsbnBook(String isbn) {
-        return authorDao.getByIsbnBook(isbn);
+        return authorDaoDb.getByIsbnBook(isbn);
     }
 
     @Override
     public List<Author> getByIdBook(long idBook) {
-        return authorDao.getByIdBook(idBook);
+        return authorDaoDb.getByIdBook(idBook);
     }
 
     @Override
     public List<Author> findAllById(Long[] ids) {
-        return authorDao.findAllById(ids);
+        return authorDaoDb.findAllById(ids);
     }
 }
