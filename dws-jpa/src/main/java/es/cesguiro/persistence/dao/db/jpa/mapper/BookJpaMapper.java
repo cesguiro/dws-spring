@@ -15,6 +15,12 @@ public interface BookJpaMapper {
 
     BookJpaMapper INSTANCE = Mappers.getMapper(BookJpaMapper.class);
 
+    Book toBookWithDetails(BookEntity bookEntity);
+
+    @Mapping(target = "authors", ignore = true)
+    @Mapping(target = "genres", ignore = true)
+    @Mapping(target = "publisher", ignore = true)
+    @Mapping(target = "category", ignore = true)
     Book toBook(BookEntity bookEntity);
 
     BookEntity toBookEntity(Book book);

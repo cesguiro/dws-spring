@@ -4,7 +4,6 @@ import es.cesguiro.domain.model.Category;
 import es.cesguiro.domain.repository.CategoryRepository;
 import es.cesguiro.persistence.dao.db.CategoryDaoDb;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -13,10 +12,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CategoryRepositoryImpl implements CategoryRepository {
 
-    private final CategoryDaoDb categoryDao;
+    private final CategoryDaoDb categoryDaoDb;
 
     @Override
     public Optional<Category> findById(Long id) {
-        return categoryDao.findById(id);
+        return categoryDaoDb.findById(id);
     }
 }

@@ -28,10 +28,10 @@ public class BookEntity {
     private BigDecimal price;
     private float discount;
     private String cover;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publisher_id")
     private PublisherEntity publisher;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
     @ManyToMany(fetch = FetchType.LAZY)

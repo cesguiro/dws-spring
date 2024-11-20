@@ -4,6 +4,7 @@ import es.cesguiro.controller.common.PaginatedResponse;
 import es.cesguiro.controller.user.webmodel.book.BookCollection;
 import es.cesguiro.controller.user.webmodel.book.BookDetail;
 import es.cesguiro.controller.user.webmodel.book.BookMapper;
+import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.usecase.book.BookCountUseCase;
 import es.cesguiro.domain.usecase.book.BookFindByIsbnUseCase;
 import es.cesguiro.domain.usecase.book.BookGetAllUseCase;
@@ -37,12 +38,15 @@ public class BookUserController {
             @RequestParam(required = false) Integer size) {
 
         int pageSize = (size != null) ? size : Integer.parseInt(defaultPageSize);
+        PaginatedResponse<Book> books = bookGetAllUseCase.execute(page - 1, pageSize);
         List<BookCollection> bookCollections = bookGetAllUseCase
                 .execute(page - 1, pageSize)
+                .getContent()
                 .stream()
                 .map(BookMapper.INSTANCE::toBookCollection)
                 .toList();
-        int total = bookCountUseCase.execute();
+        //int total = bookCountUseCase.execute();
+        //int total = 100;
 
         PaginatedResponse<BookCollection> response = new PaginatedResponse<>(bookCollections, total, page, pageSize, baseUrl + URL);
         return new ResponseEntity<>(response, HttpStatus.OK);

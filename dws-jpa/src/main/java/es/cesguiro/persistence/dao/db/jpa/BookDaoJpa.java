@@ -1,5 +1,6 @@
 package es.cesguiro.persistence.dao.db.jpa;
 
+import es.cesguiro.common.PagedResponse;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Genre;
@@ -11,6 +12,7 @@ import es.cesguiro.persistence.dao.db.jpa.mapper.GenreJpaMapper;
 import es.cesguiro.persistence.dao.db.jpa.repository.BookJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -28,7 +30,7 @@ public class BookDaoJpa implements BookDaoDb {
     @Override
     public Optional<Book> findByIsbn(String isbn) {
         return Optional.ofNullable(bookJpaRepository.findByIsbn(isbn))
-                .map(BookJpaMapper.INSTANCE::toBook);
+                .map(BookJpaMapper.INSTANCE::toBookWithDetails);
     }
 
     @Override
@@ -73,18 +75,25 @@ public class BookDaoJpa implements BookDaoDb {
     }
 
     @Override
-    public List<Book> getAll(int page, int size) {
+    public PagedResponse<Book> getAll(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return bookJpaRepository.findAll(pageable)
+        Page<BookEntity> bookPage= bookJpaRepository.findAll(pageable);
+        return new PagedResponse<>(
+                bookPage.stream()
+                        .map(BookJpaMapper.INSTANCE::toBook)
+                        .toList(),
+                bookPage.getTotalPages()
+        );
+        /*bookJpaRepository.findAll(pageable)
                 .stream()
                 .map(BookJpaMapper.INSTANCE::toBook)
-                .toList();
+                .toList();*/
     }
 
     @Override
     public Optional<Book> findById(long id) {
         return bookJpaRepository.findById(id)
-                .map(BookJpaMapper.INSTANCE::toBook);
+                .map(BookJpaMapper.INSTANCE::toBookWithDetails);
     }
 
     @Override

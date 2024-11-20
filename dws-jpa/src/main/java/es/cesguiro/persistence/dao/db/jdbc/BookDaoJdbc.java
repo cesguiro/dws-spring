@@ -1,12 +1,12 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
+import es.cesguiro.common.PagedResponse;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Genre;
 import es.cesguiro.persistence.dao.db.BookDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.BookRowMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -31,12 +31,14 @@ public class BookDaoJdbc implements BookDaoDb {
     }
 
     @Override
-    public List<Book> getAll(int page, int size) {
+    public PagedResponse<Book> getAll(int page, int size) {
         String sql = """
                         SELECT * FROM books
                         LIMIT ? OFFSET ?
                      """;
-        return jdbcTemplate.query(sql, new BookRowMapper(), size, page * size);
+        List<Book> books = jdbcTemplate.query(sql, new BookRowMapper(), size, page * size);
+        int total = this.count();
+        return new PagedResponse<>(books, total);
     }
 
     @Override
