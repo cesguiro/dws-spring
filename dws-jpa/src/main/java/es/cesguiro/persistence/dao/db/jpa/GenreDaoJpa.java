@@ -1,7 +1,8 @@
 package es.cesguiro.persistence.dao.db.jpa;
 
-import es.cesguiro.common.PaginatedResponse;
+import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.domain.model.Genre;
+import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.persistence.dao.db.GenreDaoDb;
 import es.cesguiro.persistence.dao.db.jpa.entity.GenreEntity;
 import es.cesguiro.persistence.dao.db.jpa.mapper.GenreJpaMapper;
@@ -58,17 +59,15 @@ public class GenreDaoJpa implements GenreDaoDb {
     }
 
     @Override
-    public PaginatedResponse<Genre> getAll(int page, int size) {
+    public ListWithCount<Genre> getAll(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<GenreEntity> genrePage = genreJpaRepository.findAll(pageable);
-        return new PaginatedResponse<>(
+        return new ListWithCount<>(
                 genreJpaRepository.findAll(pageable)
                         .stream()
                         .map(GenreJpaMapper.INSTANCE::toGenre)
                         .toList(),
-                genrePage.getNumberOfElements(),
-                genrePage.getNumber() + 1,
-                genrePage.getSize()
+                genrePage.getNumberOfElements()
         );
     }
 

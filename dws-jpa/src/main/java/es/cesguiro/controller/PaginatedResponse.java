@@ -1,13 +1,7 @@
-package es.cesguiro.common;
+package es.cesguiro.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import es.cesguiro.config.PropertiesConfig;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,29 +16,21 @@ public class PaginatedResponse<T> {
     private long total;
     private int currentPage;
     private int pageSize;
+    private int totalPages;
     private String next;
     private String previous;
 
-    public PaginatedResponse(List<T> data, long total, int currentPage, int pageSize) {
+    public PaginatedResponse(List<T> data, long total, int currentPage, int pageSize, String baseUrl) {
         this.data = data;
         this.total = total;
         this.currentPage = currentPage;
         this.pageSize = pageSize;
-        /*this.next = createNextLink(baseUrl);
-        this.previous = createPreviousLink(baseUrl);*/
+        //this.totalPages = (int) (total + pageSize - 1) / pageSize;
+        this.totalPages = (int) Math.ceil((double) total / pageSize);
+        this.createPaginatedLinks(baseUrl);
     }
 
-
-    /*public PaginatedResponse(List<T> data, int total, int currentPage, int pageSize, String baseUrl) {
-        this.data = data;
-        this.total = total;
-        this.currentPage = currentPage;
-        this.pageSize = pageSize;
-        this.next = createNextLink(baseUrl);
-        this.previous = createPreviousLink(baseUrl);
-    }*/
-
-    public void createPaginatedLinks(String baseUrl) {
+    private void createPaginatedLinks(String baseUrl) {
         this.next = createNextLink(baseUrl);
         this.previous = createPreviousLink(baseUrl);
     }

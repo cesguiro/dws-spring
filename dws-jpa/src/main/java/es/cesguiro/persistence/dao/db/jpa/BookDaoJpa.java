@@ -1,9 +1,10 @@
 package es.cesguiro.persistence.dao.db.jpa;
 
-import es.cesguiro.common.PaginatedResponse;
+import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Genre;
+import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.persistence.dao.db.BookDaoDb;
 import es.cesguiro.persistence.dao.db.jpa.entity.BookEntity;
 import es.cesguiro.persistence.dao.db.jpa.mapper.AuthorJpaMapper;
@@ -75,16 +76,14 @@ public class BookDaoJpa implements BookDaoDb {
     }
 
     @Override
-    public PaginatedResponse<Book> getAll(int page, int size) {
+    public ListWithCount<Book> getAll(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<BookEntity> bookPage= bookJpaRepository.findAll(pageable);
-        return new PaginatedResponse<>(
+        return new ListWithCount<Book>(
                 bookPage.stream()
                         .map(BookJpaMapper.INSTANCE::toBook)
                         .toList(),
-                bookPage.getTotalElements(),
-                bookPage.getNumber() + 1,
-                bookPage.getSize()
+                bookPage.getTotalElements()
         );
         /*bookJpaRepository.findAll(pageable)
                 .stream()

@@ -1,7 +1,8 @@
 package es.cesguiro.persistence.dao.db.jpa;
 
-import es.cesguiro.common.PaginatedResponse;
+import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.domain.model.Category;
+import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.persistence.dao.db.CategoryDaoDb;
 import es.cesguiro.persistence.dao.db.jpa.entity.CategoryEntity;
 import es.cesguiro.persistence.dao.db.jpa.mapper.CategoryJpaMapper;
@@ -31,17 +32,15 @@ public class CategoryDaoJpa implements CategoryDaoDb {
     }
 
     @Override
-    public PaginatedResponse<Category> getAll(int page, int size) {
+    public ListWithCount<Category> getAll(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<CategoryEntity> categoryPage = categoryJpaRepository.findAll(pageable);
-        return new PaginatedResponse<>(
+        return new ListWithCount<Category>(
                 categoryJpaRepository.findAll(pageable)
                         .stream()
                         .map(CategoryJpaMapper.INSTANCE::toCategory)
                         .toList(),
-                categoryPage.getNumberOfElements(),
-                categoryPage.getNumber() + 1,
-                categoryPage.getSize()
+                categoryPage.getTotalElements()
         );
 
     }

@@ -1,7 +1,8 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
-import es.cesguiro.common.PaginatedResponse;
+import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.domain.model.Category;
+import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.persistence.dao.db.CategoryDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.CategoryRowMapper;
 import lombok.RequiredArgsConstructor;
@@ -39,9 +40,9 @@ public class CategoryDaoJdbc implements CategoryDaoDb {
     }
 
     @Override
-    public PaginatedResponse<Category> getAll(int page, int size) {
+    public ListWithCount<Category> getAll(int page, int size) {
         //TODO: Implementar obtener todas las categorias paginadas
-        return new PaginatedResponse<>(List.of(), 0, page, size);
+        return new ListWithCount<>(List.of(), 0);
     }
 
     @Override

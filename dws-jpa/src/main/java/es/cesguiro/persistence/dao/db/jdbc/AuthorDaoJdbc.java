@@ -1,7 +1,8 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
-import es.cesguiro.common.PaginatedResponse;
+import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.domain.model.Author;
+import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.persistence.dao.db.AuthorDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.AuthorRowMapper;
 import lombok.RequiredArgsConstructor;
@@ -61,9 +62,9 @@ public class AuthorDaoJdbc implements AuthorDaoDb {
     }
 
     @Override
-    public PaginatedResponse<Author> getAll(int page, int size) {
+    public ListWithCount<Author> getAll(int page, int size) {
         //TODO: Implementar obtener todos los autores paginados
-        return new PaginatedResponse<>(List.of(), 0, page, size);
+        return new ListWithCount<>(List.of(), 0);
     }
 
     @Override

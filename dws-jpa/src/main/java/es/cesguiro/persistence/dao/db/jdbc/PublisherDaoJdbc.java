@@ -1,6 +1,7 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
-import es.cesguiro.common.PaginatedResponse;
+import es.cesguiro.controller.PaginatedResponse;
+import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.domain.model.Publisher;
 import es.cesguiro.persistence.dao.db.PublisherDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.PublisherRowMapper;
@@ -42,8 +43,8 @@ public class PublisherDaoJdbc implements PublisherDaoDb {
     }
 
     @Override
-    public PaginatedResponse<Publisher> getAll(int page, int size) {
-        return new PaginatedResponse<>(List.of(), 0, page, size);
+    public ListWithCount<Publisher> getAll(int page, int size) {
+        return new ListWithCount<>(List.of(), 0);
     }
 
     @Override

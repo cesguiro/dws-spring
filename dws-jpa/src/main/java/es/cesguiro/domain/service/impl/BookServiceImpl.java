@@ -1,11 +1,11 @@
 package es.cesguiro.domain.service.impl;
 
-import es.cesguiro.common.PaginatedResponse;
 import es.cesguiro.common.annotation.DomainService;
 import es.cesguiro.common.exception.ResourceAlreadyExistsException;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Genre;
+import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.domain.repository.BookRepository;
 import es.cesguiro.domain.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public PaginatedResponse<Book> getAll(int page, int size) {
+    public ListWithCount<Book> getAll(int page, int size) {
         return bookRepository.getAll(page, size);
     }
 

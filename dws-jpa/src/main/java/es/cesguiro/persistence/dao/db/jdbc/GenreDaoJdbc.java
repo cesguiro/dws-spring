@@ -1,7 +1,8 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
-import es.cesguiro.common.PaginatedResponse;
+import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.domain.model.Genre;
+import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.persistence.dao.db.GenreDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.GenreRowMapper;
 import lombok.RequiredArgsConstructor;
@@ -61,9 +62,9 @@ public class GenreDaoJdbc implements GenreDaoDb {
     }
 
     @Override
-    public PaginatedResponse<Genre> getAll(int page, int size) {
+    public ListWithCount<Genre> getAll(int page, int size) {
         //TODO: Implementar obtener todas los generos paginados
-        return new PaginatedResponse<>(List.of(), 0, page, size);
+        return new ListWithCount<>(List.of(), 0);
     }
 
     @Override

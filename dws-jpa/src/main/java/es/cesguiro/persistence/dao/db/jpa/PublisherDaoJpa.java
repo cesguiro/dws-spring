@@ -1,6 +1,7 @@
 package es.cesguiro.persistence.dao.db.jpa;
 
-import es.cesguiro.common.PaginatedResponse;
+import es.cesguiro.controller.PaginatedResponse;
+import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.domain.model.Publisher;
 import es.cesguiro.persistence.dao.db.PublisherDaoDb;
 import es.cesguiro.persistence.dao.db.jpa.entity.PublisherEntity;
@@ -31,17 +32,15 @@ public class PublisherDaoJpa implements PublisherDaoDb {
     }
 
     @Override
-    public PaginatedResponse<Publisher> getAll(int page, int size) {
+    public ListWithCount<Publisher> getAll(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<PublisherEntity> publisherPage = publisherJpaRepository.findAll(pageable);
-        return new PaginatedResponse<>(
+        return new ListWithCount<>(
                 publisherJpaRepository.findAll(pageable)
                         .stream()
                         .map(PublisherJpaMapper.INSTANCE::toPublisher)
                         .toList(),
-                publisherPage.getNumberOfElements(),
-                publisherPage.getNumber() + 1,
-                publisherPage.getSize()
+                publisherPage.getNumberOfElements()
         );
 
     }

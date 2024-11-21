@@ -1,9 +1,9 @@
 package es.cesguiro.domain.service;
 
-import es.cesguiro.common.PaginatedResponse;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Genre;
+import es.cesguiro.domain.model.ListWithCount;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +12,7 @@ public interface BookService {
 
     List<Book> getAll();
 
-    PaginatedResponse<Book> getAll(int page, int size);
+    ListWithCount<Book> getAll(int page, int size);
 
     long count();
 

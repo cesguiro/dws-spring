@@ -1,11 +1,12 @@
 package es.cesguiro.controller.user;
 
-import es.cesguiro.common.PaginatedResponse;
+import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.config.PropertiesConfig;
 import es.cesguiro.controller.user.webmodel.book.BookCollection;
 import es.cesguiro.controller.user.webmodel.book.BookDetail;
 import es.cesguiro.controller.user.webmodel.book.BookMapper;
 import es.cesguiro.domain.model.Book;
+import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.domain.usecase.book.BookCountUseCase;
 import es.cesguiro.domain.usecase.book.BookFindByIsbnUseCase;
 import es.cesguiro.domain.usecase.book.BookGetAllUseCase;
@@ -14,8 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,16 +38,15 @@ public class BookUserController {
             @RequestParam(required = false) Integer size) {
 
         int pageSize = (size != null) ? size : Integer.parseInt(defaultPageSize);
-        PaginatedResponse<Book> paginatedResponse = bookGetAllUseCase.execute(page - 1, pageSize);
+        String baseUrl = PropertiesConfig.getSetting("app.base.url") + URL;
+        ListWithCount<Book> bookList = bookGetAllUseCase.execute(page - 1, pageSize);
         PaginatedResponse<BookCollection> response = new PaginatedResponse<>(
-                paginatedResponse
-                        .getData()
+                bookList
+                        .getList()
                         .stream()
                         .map(BookMapper.INSTANCE::toBookCollection)
                         .toList(),
-                paginatedResponse.getTotal(), paginatedResponse.getCurrentPage(), paginatedResponse.getPageSize());
-        //paginatedResponse.getData().forEach(BookMapper.INSTANCE::toBookCollection);
-        response.createPaginatedLinks(PropertiesConfig.getSetting("app.base.url") + URL);
+                bookList.getCount(), page, pageSize, baseUrl);
         return new ResponseEntity<>(response, HttpStatus.OK);
         /*List<BookCollection> bookCollections = bookGetAllUseCase
                 .execute(page - 1, pageSize)

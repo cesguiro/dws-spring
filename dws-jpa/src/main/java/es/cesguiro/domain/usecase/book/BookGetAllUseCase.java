@@ -1,9 +1,9 @@
 package es.cesguiro.domain.usecase.book;
 
-import es.cesguiro.common.PaginatedResponse;
 import es.cesguiro.domain.model.Book;
+import es.cesguiro.domain.model.ListWithCount;
 
 public interface BookGetAllUseCase {
 
-    PaginatedResponse<Book> execute(int page, int pageSize);
+    ListWithCount<Book> execute(int page, int pageSize);
 }

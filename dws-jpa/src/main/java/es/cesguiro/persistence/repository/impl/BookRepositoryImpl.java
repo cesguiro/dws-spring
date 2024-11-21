@@ -1,7 +1,7 @@
 package es.cesguiro.persistence.repository.impl;
 
-import es.cesguiro.common.PaginatedResponse;
 import es.cesguiro.domain.model.Book;
+import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.domain.repository.BookRepository;
 import es.cesguiro.persistence.dao.cache.BookDaoCache;
 import es.cesguiro.persistence.dao.db.BookDaoDb;
@@ -25,7 +25,7 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public PaginatedResponse<Book> getAll(int page, int size) {
+    public ListWithCount<Book> getAll(int page, int size) {
         return bookDaoDb.getAll(page, size);
     }
 

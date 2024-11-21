@@ -2,13 +2,13 @@ package es.cesguiro.controller.admin;
 
 import es.cesguiro.config.PropertiesConfig;
 import es.cesguiro.controller.admin.webmodel.book.BookCollection;
-import es.cesguiro.common.PaginatedResponse;
+import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.controller.admin.webmodel.book.BookMapper;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Genre;
+import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.domain.usecase.book.admin.*;
-import es.cesguiro.domain.usecase.book.BookCountUseCase;
 import es.cesguiro.domain.usecase.book.BookFindByIsbnUseCase;
 import es.cesguiro.domain.usecase.book.BookGetAllUseCase;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +32,6 @@ public class BookAdminController {
     private String defaultPageSize;
 
     private final BookGetAllUseCase bookGetAllUseCase;
-    private final BookCountUseCase bookCountUseCase;
     private final BookFindByIsbnUseCase bookFindByIsbnUseCase;
     private final BookInsertAuthorsUseCase bookInsertAuthorsUseCase;
     private final BookInsertGenresUseCase bookInsertGenresUseCase;
@@ -44,16 +43,15 @@ public class BookAdminController {
             @RequestParam(required = false) Integer size) {
 
         int pageSize = (size != null) ? size : Integer.parseInt(defaultPageSize);
-        PaginatedResponse<Book> paginatedResponse = bookGetAllUseCase.execute(page - 1, pageSize);
+        String baseUrl = PropertiesConfig.getSetting("app.base.url") + URL;
+        ListWithCount<Book> bookList = bookGetAllUseCase.execute(page - 1, pageSize);
         PaginatedResponse<BookCollection> response = new PaginatedResponse<>(
-                paginatedResponse
-                        .getData()
+                bookList
+                        .getList()
                         .stream()
                         .map(BookMapper.INSTANCE::toBookCollection)
                         .toList(),
-                paginatedResponse.getTotal(), paginatedResponse.getCurrentPage(), paginatedResponse.getPageSize());
-        //paginatedResponse.getData().forEach(BookMapper.INSTANCE::toBookCollection);
-        response.createPaginatedLinks(PropertiesConfig.getSetting("app.base.url") + URL);
+                bookList.getCount(), page, pageSize, baseUrl);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
 
