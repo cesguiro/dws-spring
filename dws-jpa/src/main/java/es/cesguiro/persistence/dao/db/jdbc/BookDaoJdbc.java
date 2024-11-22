@@ -1,6 +1,5 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
-import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Genre;
@@ -8,6 +7,7 @@ import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.persistence.dao.db.BookDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.BookRowMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -20,8 +20,12 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
+@Primary
 public class BookDaoJdbc implements BookDaoDb {
+
     private final JdbcTemplate jdbcTemplate;
+    private final AuthorDaoJdbc authorDaoJdbc;
+    private final GenreDaoJdbc genreDaoJdbc;
 
     @Override
     public List<Book> getAll() {
@@ -76,6 +80,7 @@ public class BookDaoJdbc implements BookDaoDb {
            """;
         try {
             Book book = jdbcTemplate.queryForObject(sql, new BookRowMapper(), isbn);
+            setAuthorsAndGenres(book);
             return Optional.of(book);
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
@@ -92,9 +97,17 @@ public class BookDaoJdbc implements BookDaoDb {
            """;
         try {
             Book book = jdbcTemplate.queryForObject(sql, new BookRowMapper(), id);
+            setAuthorsAndGenres(book);
             return Optional.of(book);
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
+        }
+    }
+
+    private void setAuthorsAndGenres(Book book) {
+        if(book != null) {
+            book.setAuthors(authorDaoJdbc.getByIdBook(book.getId()));
+            book.setGenres(genreDaoJdbc.getByIdBook(book.getId()));
         }
     }
 
@@ -132,7 +145,13 @@ public class BookDaoJdbc implements BookDaoDb {
 
     @Override
     public void delete(long id) {
-        //TODO: Implementar borrar libro
+        this.deleteAuthors(id);
+        this.deleteGenres(id);
+        String sql = """
+                    DELETE FROM books
+                    WHERE id = ?
+                """;
+        jdbcTemplate.update(sql, id);
     }
 
     @Override

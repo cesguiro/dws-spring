@@ -1,6 +1,5 @@
 package es.cesguiro.persistence.dao.db.jpa;
 
-import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.persistence.dao.db.AuthorDaoDb;
@@ -8,6 +7,7 @@ import es.cesguiro.persistence.dao.db.jpa.entity.AuthorEntity;
 import es.cesguiro.persistence.dao.db.jpa.mapper.AuthorJpaMapper;
 import es.cesguiro.persistence.dao.db.jpa.repository.AuthorJpaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository("authorDaoJpa")
+//@Primary
 @RequiredArgsConstructor
 public class AuthorDaoJpa implements AuthorDaoDb {
 

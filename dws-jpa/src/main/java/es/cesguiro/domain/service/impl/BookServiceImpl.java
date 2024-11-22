@@ -37,12 +37,14 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Optional<Book> findByIsbn(String isbn) {
-        return bookRepository.findByIsbn(isbn);
+        Book book= bookRepository.findByIsbn(isbn).orElse(null);
+        return Optional.ofNullable(book);
     }
 
     @Override
     public Optional<Book> findById(long id) {
-        return bookRepository.findById(id);
+        Book book= bookRepository.findById(id).orElse(null);
+        return Optional.ofNullable(book);
     }
 
     @Override
@@ -70,6 +72,11 @@ public class BookServiceImpl implements BookService {
             throw new ResourceAlreadyExistsException("Genre " + genre.getId() + "already exists");
         }
         book.addGenre(genre);
+    }
+
+    @Override
+    public void delete(long id) {
+        bookRepository.delete(id);
     }
 
 }

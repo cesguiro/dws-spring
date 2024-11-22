@@ -1,6 +1,5 @@
 package es.cesguiro.persistence.dao.db.jpa;
 
-import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.domain.model.Genre;
 import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.persistence.dao.db.GenreDaoDb;
@@ -8,6 +7,7 @@ import es.cesguiro.persistence.dao.db.jpa.entity.GenreEntity;
 import es.cesguiro.persistence.dao.db.jpa.mapper.GenreJpaMapper;
 import es.cesguiro.persistence.dao.db.jpa.repository.GenreJpaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +18,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
+//@Primary
 public class GenreDaoJpa implements GenreDaoDb {
 
     private final GenreJpaRepository genreJpaRepository;

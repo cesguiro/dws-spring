@@ -1,6 +1,5 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
-import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.domain.model.Category;
 import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.persistence.dao.db.CategoryDaoDb;

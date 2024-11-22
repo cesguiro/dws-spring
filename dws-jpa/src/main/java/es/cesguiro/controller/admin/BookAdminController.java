@@ -36,6 +36,7 @@ public class BookAdminController {
     private final BookInsertAuthorsUseCase bookInsertAuthorsUseCase;
     private final BookInsertGenresUseCase bookInsertGenresUseCase;
     private final BookInsertUseCase bookInsertUseCase;
+    private final BookDeleteUseCase bookDeleteUseCase;
 
     @GetMapping
     public ResponseEntity<PaginatedResponse<BookCollection>> getAll(
@@ -53,19 +54,6 @@ public class BookAdminController {
                         .toList(),
                 bookList.getCount(), page, pageSize, baseUrl);
         return new ResponseEntity<>(response, HttpStatus.OK);
-
-
-        /*int pageSize = (size != null) ? size : Integer.parseInt(defaultPageSize);
-        List<BookCollection> books = bookGetAllUseCase
-                .execute(page - 1, pageSize)
-                .stream()
-                .map(BookMapper.INSTANCE::toBookCollection)
-                .toList();
-
-        int total = bookCountUseCase.execute();
-
-        PaginatedResponse<BookCollection> response = new PaginatedResponse<>(books, total, page, pageSize, baseUrl + URL);
-        return new ResponseEntity<>(response, HttpStatus.OK);*/
     }
 
     @GetMapping("/{isbn}")
@@ -90,5 +78,11 @@ public class BookAdminController {
     public ResponseEntity<Void> insert(@RequestBody Book book) {
         bookInsertUseCase.execute(book);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        bookDeleteUseCase.execute(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

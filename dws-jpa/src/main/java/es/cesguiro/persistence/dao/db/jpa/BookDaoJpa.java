@@ -1,6 +1,5 @@
 package es.cesguiro.persistence.dao.db.jpa;
 
-import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Genre;
@@ -22,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-@Primary
+//@Primary
 @RequiredArgsConstructor
 public class BookDaoJpa implements BookDaoDb {
 

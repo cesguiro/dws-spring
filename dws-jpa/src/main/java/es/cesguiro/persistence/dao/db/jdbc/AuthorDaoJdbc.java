@@ -1,11 +1,11 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
-import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.persistence.dao.db.AuthorDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.AuthorRowMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Repository("authorDaoJdbc")
-//@Primary
+@Primary
 @RequiredArgsConstructor
 public class AuthorDaoJdbc implements AuthorDaoDb {
 

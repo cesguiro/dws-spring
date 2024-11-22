@@ -18,7 +18,7 @@ public interface AuthorJpaRepository extends JpaRepository<AuthorEntity, Long> {
 
     @Query(value = "SELECT a.* FROM authors a " +
             "JOIN books_authors ba ON a.id = ba.author_id " +
-            "AND ba.book_id = :id)", nativeQuery = true)
+            "AND ba.book_id = :id", nativeQuery = true)
     List<AuthorEntity> findByBooksId(@Param("id") Long id);
 
 }
