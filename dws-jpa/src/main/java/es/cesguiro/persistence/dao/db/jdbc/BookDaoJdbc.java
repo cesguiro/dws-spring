@@ -1,8 +1,10 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
+import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Genre;
+import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.persistence.dao.db.BookDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.BookRowMapper;
 import lombok.RequiredArgsConstructor;
@@ -30,20 +32,22 @@ public class BookDaoJdbc implements BookDaoDb {
     }
 
     @Override
-    public List<Book> getAll(int page, int size) {
+    public ListWithCount<Book> getAll(int page, int size) {
         String sql = """
                         SELECT * FROM books
                         LIMIT ? OFFSET ?
                      """;
-        return jdbcTemplate.query(sql, new BookRowMapper(), size, page * size);
+        List<Book> books = jdbcTemplate.query(sql, new BookRowMapper(), size, page * size);
+        int total = (int) this.count();
+        return new ListWithCount<Book>(books, total);
     }
 
     @Override
-    public int count() {
+    public long count() {
         String sql = """
                         SELECT COUNT(*) FROM books
                      """;
-        return jdbcTemplate.queryForObject(sql, Integer.class);
+        return jdbcTemplate.queryForObject(sql, Long.class);
     }
 
     @Override

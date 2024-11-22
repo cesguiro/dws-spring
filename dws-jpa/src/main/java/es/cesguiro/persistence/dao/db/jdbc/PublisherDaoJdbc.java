@@ -1,17 +1,20 @@
 package es.cesguiro.persistence.dao.db.jdbc;
 
-import es.cesguiro.domain.model.Book;
+import es.cesguiro.controller.PaginatedResponse;
+import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.domain.model.Publisher;
 import es.cesguiro.persistence.dao.db.PublisherDaoDb;
 import es.cesguiro.persistence.dao.db.jdbc.mapper.PublisherRowMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Component
+@Primary
 @RequiredArgsConstructor
 public class PublisherDaoJdbc implements PublisherDaoDb {
 
@@ -40,8 +43,8 @@ public class PublisherDaoJdbc implements PublisherDaoDb {
     }
 
     @Override
-    public List<Publisher> getAll(int page, int size) {
-        return List.of();
+    public ListWithCount<Publisher> getAll(int page, int size) {
+        return new ListWithCount<>(List.of(), 0);
     }
 
     @Override
@@ -56,18 +59,16 @@ public class PublisherDaoJdbc implements PublisherDaoDb {
 
     @Override
     public void delete(long id) {
-
     }
 
     @Override
-    public int count() {
+    public long count() {
         return 0;
     }
 
     @Override
     public Publisher save(Publisher publisher) {
-        //TODO: Implementar guardar un autor
-        return null;
+        publisher.setId(this.insert(publisher));
+        return publisher;
     }
-
 }
