@@ -19,7 +19,10 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class BookDaoJdbc implements BookDaoDb {
+
     private final JdbcTemplate jdbcTemplate;
+    private final AuthorDaoJdbc authorDaoJdbc;
+    private final GenreDaoJdbc genreDaoJdbc;
 
     @Override
     public List<Book> getAll() {
@@ -72,6 +75,7 @@ public class BookDaoJdbc implements BookDaoDb {
            """;
         try {
             Book book = jdbcTemplate.queryForObject(sql, new BookRowMapper(), isbn);
+            setAuthorsAndGenres(book);
             return Optional.of(book);
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
@@ -88,9 +92,17 @@ public class BookDaoJdbc implements BookDaoDb {
            """;
         try {
             Book book = jdbcTemplate.queryForObject(sql, new BookRowMapper(), id);
+            setAuthorsAndGenres(book);
             return Optional.of(book);
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
+        }
+    }
+
+    private void setAuthorsAndGenres(Book book) {
+        if(book != null) {
+            book.setAuthors(authorDaoJdbc.getByIdBook(book.getId()));
+            book.setGenres(genreDaoJdbc.getByIdBook(book.getId()));
         }
     }
 
@@ -128,7 +140,13 @@ public class BookDaoJdbc implements BookDaoDb {
 
     @Override
     public void delete(long id) {
-        //TODO: Implementar borrar libro
+        this.deleteAuthors(id);
+        this.deleteGenres(id);
+        String sql = """
+                    DELETE FROM books
+                    WHERE id = ?
+                """;
+        jdbcTemplate.update(sql, id);
     }
 
     @Override

@@ -71,4 +71,9 @@ public class BookServiceImpl implements BookService {
         book.addGenre(genre);
     }
 
+    @Override
+    public void delete(long id) {
+        bookRepository.delete(id);
+    }
+
 }

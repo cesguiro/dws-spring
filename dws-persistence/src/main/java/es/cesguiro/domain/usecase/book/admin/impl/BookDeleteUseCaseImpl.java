@@ -3,7 +3,6 @@ package es.cesguiro.domain.usecase.book.admin.impl;
 import es.cesguiro.common.annotation.DomainTransactional;
 import es.cesguiro.common.annotation.DomainUseCase;
 import es.cesguiro.common.exception.ResourceNotFoundException;
-import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.service.BookService;
 import es.cesguiro.domain.usecase.book.admin.BookDeleteUseCase;
 import lombok.RequiredArgsConstructor;

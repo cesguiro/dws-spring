@@ -1,4 +1,4 @@
-package es.cesguiro.controller.common;
+package es.cesguiro.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

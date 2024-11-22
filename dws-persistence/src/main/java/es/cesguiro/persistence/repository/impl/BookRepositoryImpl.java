@@ -55,4 +55,9 @@ public class BookRepositoryImpl implements BookRepository {
         bookDaoDb.save(book);
     }
 
+    @Override
+    public void delete(long id) {
+        bookDaoDb.delete(id);
+    }
+
 }

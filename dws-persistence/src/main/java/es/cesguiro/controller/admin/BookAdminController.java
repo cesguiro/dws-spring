@@ -2,7 +2,7 @@ package es.cesguiro.controller.admin;
 
 import es.cesguiro.controller.admin.webmodel.book.BookCollection;
 import es.cesguiro.controller.admin.webmodel.book.BookMapper;
-import es.cesguiro.controller.common.PaginatedResponse;
+import es.cesguiro.controller.PaginatedResponse;
 import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.domain.model.Genre;
@@ -36,6 +36,7 @@ public class BookAdminController {
     private final BookInsertAuthorsUseCase bookInsertAuthorsUseCase;
     private final BookInsertGenresUseCase bookInsertGenresUseCase;
     private final BookInsertUseCase bookInsertUseCase;
+    private final BookDeleteUseCase bookDeleteUseCase;
 
     @GetMapping
     public ResponseEntity<PaginatedResponse<BookCollection>> getAll(
@@ -76,5 +77,11 @@ public class BookAdminController {
     public ResponseEntity<Void> insert(@RequestBody Book book) {
         bookInsertUseCase.execute(book);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        bookDeleteUseCase.execute(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
