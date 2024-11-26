@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-//@Primary
+@Primary
 @RequiredArgsConstructor
 public class BookDaoJpa implements BookDaoDb {
 

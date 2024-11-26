@@ -1,8 +1,5 @@
 package es.cesguiro.persistence.dao.db.jpa.mapper;
 
-import es.cesguiro.controller.user.webmodel.author.AuthorMapper;
-import es.cesguiro.controller.user.webmodel.genre.GenreMapper;
-import es.cesguiro.controller.user.webmodel.publisher.PublisherMapper;
 import es.cesguiro.domain.model.Book;
 import es.cesguiro.persistence.dao.db.jpa.entity.BookEntity;
 import org.mapstruct.Mapper;

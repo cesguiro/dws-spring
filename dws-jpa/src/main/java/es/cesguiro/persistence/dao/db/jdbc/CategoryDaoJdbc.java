@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-@Primary
+//@Primary
 @RequiredArgsConstructor
 public class CategoryDaoJdbc implements CategoryDaoDb {
 

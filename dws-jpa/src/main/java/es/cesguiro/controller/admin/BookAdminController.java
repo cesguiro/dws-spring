@@ -24,9 +24,8 @@ import java.util.List;
 @RequestMapping(BookAdminController.URL)
 public class BookAdminController {
 
+    //public static final String URL = PropertiesConfig.getSetting("app.admin.path") + "/books";
     public static final String URL = "/api/admin/books";
-    /*@Value("${app.base.url}")
-    private String baseUrl;*/
 
     @Value("${app.pageSize.default}")
     private String defaultPageSize;
@@ -85,4 +84,5 @@ public class BookAdminController {
         bookDeleteUseCase.execute(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }

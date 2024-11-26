@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-//@Primary
+@Primary
 public class GenreDaoJpa implements GenreDaoDb {
 
     private final GenreJpaRepository genreJpaRepository;

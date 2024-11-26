@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-//@Primary
+@Primary
 public class CategoryDaoJpa implements CategoryDaoDb {
 
     private final CategoryJpaRepository categoryJpaRepository;

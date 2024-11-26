@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Repository("authorDaoJdbc")
-@Primary
+//@Primary
 @RequiredArgsConstructor
 public class AuthorDaoJdbc implements AuthorDaoDb {
 

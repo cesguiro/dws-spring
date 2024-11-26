@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository("authorDaoJpa")
-//@Primary
+@Primary
 @RequiredArgsConstructor
 public class AuthorDaoJpa implements AuthorDaoDb {
 

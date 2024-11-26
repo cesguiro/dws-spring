@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Component
-@Primary
+//@Primary
 @RequiredArgsConstructor
 public class GenreDaoJdbc implements GenreDaoDb {
 

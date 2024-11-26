@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-@Primary
+//@Primary
 public class BookDaoJdbc implements BookDaoDb {
 
     private final JdbcTemplate jdbcTemplate;

@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-//@Primary
+@Primary
 public class PublisherDaoJpa implements PublisherDaoDb {
 
     private final PublisherJpaRepository publisherJpaRepository;
