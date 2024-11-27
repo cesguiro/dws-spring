@@ -84,10 +84,6 @@ public class BookDaoJpa implements BookDaoDb {
                         .toList(),
                 bookPage.getTotalElements()
         );
-        /*bookJpaRepository.findAll(pageable)
-                .stream()
-                .map(BookJpaMapper.INSTANCE::toBook)
-                .toList();*/
     }
 
     @Override

@@ -18,15 +18,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(BookUserController.URL)
+@RequestMapping("${app.api.path}/books")
 public class BookUserController {
 
-    public static final String URL = "/api/books";
-    /*@Value("${app.base.url}")
-    private String baseUrl;*/
+    public static final String URL = PropertiesConfig.getSetting("app.api.path") + "/books";
+    private final String defaultPageSize = PropertiesConfig.getSetting("app.pageSize.default");
 
-    @Value("${app.pageSize.default}")
-    private String defaultPageSize;
 
     private final BookGetAllUseCase bookGetAllUseCase;
     private final BookCountUseCase bookCountUseCase;
@@ -48,18 +45,6 @@ public class BookUserController {
                         .toList(),
                 bookList.getCount(), page, pageSize, baseUrl);
         return new ResponseEntity<>(response, HttpStatus.OK);
-        /*List<BookCollection> bookCollections = bookGetAllUseCase
-                .execute(page - 1, pageSize)
-                .getContent()
-                .stream()
-                .map(BookMapper.INSTANCE::toBookCollection)
-                .toList();
-        //int total = bookCountUseCase.execute();
-        //int total = 100;
-
-        PaginatedResponse<BookCollection> response = new PaginatedResponse<>(bookCollections, total, page, pageSize, baseUrl + URL);
-        return new ResponseEntity<>(response, HttpStatus.OK);*/
-
     }
 
 

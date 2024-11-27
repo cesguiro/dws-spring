@@ -12,7 +12,6 @@ import es.cesguiro.domain.usecase.book.admin.*;
 import es.cesguiro.domain.usecase.book.BookFindByIsbnUseCase;
 import es.cesguiro.domain.usecase.book.BookGetAllUseCase;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,14 +20,11 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(BookAdminController.URL)
+@RequestMapping("${app.admin.path}/books")
 public class BookAdminController {
 
-    //public static final String URL = PropertiesConfig.getSetting("app.admin.path") + "/books";
-    public static final String URL = "/api/admin/books";
-
-    @Value("${app.pageSize.default}")
-    private String defaultPageSize;
+    public static final String URL = PropertiesConfig.getSetting("app.admin.path") + "/books";
+    private final String defaultPageSize = PropertiesConfig.getSetting("app.pageSize.default");
 
     private final BookGetAllUseCase bookGetAllUseCase;
     private final BookFindByIsbnUseCase bookFindByIsbnUseCase;
