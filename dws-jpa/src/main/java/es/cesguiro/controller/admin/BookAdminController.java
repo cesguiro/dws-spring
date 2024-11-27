@@ -1,5 +1,6 @@
 package es.cesguiro.controller.admin;
 
+import es.cesguiro.config.ApiConfig;
 import es.cesguiro.config.PropertiesConfig;
 import es.cesguiro.controller.admin.webmodel.book.BookCollection;
 import es.cesguiro.controller.PaginatedResponse;
@@ -20,10 +21,11 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("${app.admin.path}/books")
+@RequestMapping("${app.admin.path}/" + BookAdminController.RESOURCE)
 public class BookAdminController {
 
-    public static final String URL = PropertiesConfig.getSetting("app.admin.path") + "/books";
+    public static final String RESOURCE = "books";
+    public static final String BASE_URL = ApiConfig.getAdminUrl() + "/" + RESOURCE;
     private final String defaultPageSize = PropertiesConfig.getSetting("app.pageSize.default");
 
     private final BookGetAllUseCase bookGetAllUseCase;
@@ -39,7 +41,6 @@ public class BookAdminController {
             @RequestParam(required = false) Integer size) {
 
         int pageSize = (size != null) ? size : Integer.parseInt(defaultPageSize);
-        String baseUrl = PropertiesConfig.getSetting("app.base.url") + URL;
         ListWithCount<Book> bookList = bookGetAllUseCase.execute(page - 1, pageSize);
         PaginatedResponse<BookCollection> response = new PaginatedResponse<>(
                 bookList
@@ -47,7 +48,7 @@ public class BookAdminController {
                         .stream()
                         .map(BookMapper.INSTANCE::toBookCollection)
                         .toList(),
-                bookList.getCount(), page, pageSize, baseUrl);
+                bookList.getCount(), page, pageSize, BASE_URL);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

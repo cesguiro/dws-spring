@@ -41,7 +41,9 @@ public class PropertiesConfig {
             String resolved = properties.getProperty(placeholder);
 
             if (resolved == null) {
-                throw new IllegalArgumentException("No se pudo resolver la propiedad: " + placeholder);
+                throw new IllegalArgumentException(
+                        String.format("No se pudo resolver el placeholder '%s' en la propiedad '%s'", placeholder, value)
+                );
             }
 
             matcher.appendReplacement(resolvedValue, resolved);
