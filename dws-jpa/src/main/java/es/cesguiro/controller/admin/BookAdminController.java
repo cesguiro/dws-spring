@@ -21,11 +21,11 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("${app.admin.path}/" + BookAdminController.RESOURCE)
+@RequestMapping("${app.admin.path}" + BookAdminController.RESOURCE_PATH)
 public class BookAdminController {
 
-    public static final String RESOURCE = "books";
-    public static final String BASE_URL = ApiConfig.getAdminUrl() + "/" + RESOURCE;
+    public static final String RESOURCE_PATH = "/books";
+    public static final String BASE_URL = ApiConfig.getAdminUrl() + RESOURCE_PATH;
     private final String defaultPageSize = PropertiesConfig.getSetting("app.pageSize.default");
 
     private final BookGetAllUseCase bookGetAllUseCase;

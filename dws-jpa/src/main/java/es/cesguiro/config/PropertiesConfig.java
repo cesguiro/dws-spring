@@ -21,6 +21,12 @@ public class PropertiesConfig {
     }
 
     public static String getSetting(String key) {
+        String value = properties.getProperty(key);
+        if (value == null) {
+            throw new IllegalArgumentException(
+                    String.format("Property '%s' not found", key)
+            );
+        }
         return properties.getProperty(key);
     }
 
@@ -42,7 +48,7 @@ public class PropertiesConfig {
 
             if (resolved == null) {
                 throw new IllegalArgumentException(
-                        String.format("No se pudo resolver el placeholder '%s' en la propiedad '%s'", placeholder, value)
+                        String.format("Placeholder '%s' not found in property '%s'", placeholder, value)
                 );
             }
 
