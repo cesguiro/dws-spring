@@ -1,9 +1,9 @@
-package es.cesguiro.controller.user.webmodel.book;
+package es.cesguiro.controller.webmodel.book;
 
 
 import java.math.BigDecimal;
 
-public record BookCollection (
+public record BookUserCollection(
         String isbn,
         String title,
         BigDecimal price,

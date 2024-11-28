@@ -1,4 +1,4 @@
-package es.cesguiro.controller.user.webmodel.author;
+package es.cesguiro.controller.webmodel.author;
 
 import es.cesguiro.domain.model.Author;
 import org.mapstruct.Mapper;

@@ -1,4 +1,4 @@
-package es.cesguiro.controller;
+package es.cesguiro.controller.webmodel;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

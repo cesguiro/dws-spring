@@ -1,4 +1,4 @@
-package es.cesguiro.controller.user.webmodel.publisher;
+package es.cesguiro.controller.webmodel.publisher;
 
 import es.cesguiro.domain.model.Publisher;
 import org.mapstruct.Mapper;

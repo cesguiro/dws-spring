@@ -21,4 +21,12 @@ public class BookFindByIsbnUseCaseImpl implements BookFindByIsbnUseCase {
                 .findByIsbn(isbn)
                 .orElseThrow(() -> new ResourceNotFoundException("Book isbn " + isbn + " not found"));
     }
+
+    @Override
+    public Book execute(Object... params) {
+        String isbn = (String) params[0];
+        return bookService
+                .findByIsbn(isbn)
+                .orElseThrow(() -> new ResourceNotFoundException("Book isbn " + isbn + " not found"));
+    }
 }

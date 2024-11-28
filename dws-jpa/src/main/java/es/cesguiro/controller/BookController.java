@@ -2,80 +2,113 @@ package es.cesguiro.controller;
 
 import es.cesguiro.config.ApiConfig;
 import es.cesguiro.config.PropertiesConfig;
-import es.cesguiro.controller.user.BookUserController;
-import es.cesguiro.controller.user.webmodel.book.BookCollection;
-import es.cesguiro.controller.user.webmodel.book.BookDetail;
-import es.cesguiro.controller.user.webmodel.book.BookMapper;
+import es.cesguiro.controller.webmodel.PaginatedResponse;
+import es.cesguiro.controller.webmodel.book.BookAdminCollection;
+import es.cesguiro.controller.webmodel.book.BookMapper;
+import es.cesguiro.controller.webmodel.book.BookUserCollection;
+import es.cesguiro.controller.webmodel.book.BookUserDetail;
+import es.cesguiro.domain.model.Author;
 import es.cesguiro.domain.model.Book;
+import es.cesguiro.domain.model.Genre;
 import es.cesguiro.domain.model.ListWithCount;
 import es.cesguiro.domain.usecase.book.BookFindByIsbnUseCase;
 import es.cesguiro.domain.usecase.book.BookGetAllUseCase;
+import es.cesguiro.domain.usecase.book.admin.BookDeleteUseCase;
+import es.cesguiro.domain.usecase.book.admin.BookInsertAuthorsUseCase;
+import es.cesguiro.domain.usecase.book.admin.BookInsertGenresUseCase;
+import es.cesguiro.domain.usecase.book.admin.BookInsertUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("${app.api.path}")
-public class BookController {
+public class BookController extends BaseController {
 
     public static final String RESOURCE_PATH = "/books";
-    //public static final String ADMIN_PATH = ApiConfig.getAdminPath() + RESOURCE_PATH;
+    public static final String RESOURCE_ADMIN_PATH = ADMIN_PATH + RESOURCE_PATH;
     public static final String BASE_URL = ApiConfig.getBaseUrl() + RESOURCE_PATH;
-    public static final String ADMIN_URL = ApiConfig.getAdminUrl() + RESOURCE_PATH;
-
-    private final String DEFAULT_PAGE_SIZE = PropertiesConfig.getSetting("app.pageSize.default");
 
 
     private final BookGetAllUseCase bookGetAllUseCase;
     private final BookFindByIsbnUseCase bookFindByIsbnUseCase;
+    private final BookInsertAuthorsUseCase bookInsertAuthorsUseCase;
+    private final BookInsertGenresUseCase bookInsertGenresUseCase;
+    private final BookInsertUseCase bookInsertUseCase;
+    private final BookDeleteUseCase bookDeleteUseCase;
 
-
+    @Override
+    protected ListWithCount<Book> getList(int page, int size) {
+        return bookGetAllUseCase.execute(page - 1, size);
+    }
 
     @GetMapping(RESOURCE_PATH)
-    public ResponseEntity<PaginatedResponse<BookCollection>> getAllUser(
+    public ResponseEntity<PaginatedResponse<BookUserCollection>> getAllUser(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(required = false) Integer size) {
-
-        int pageSize = (size != null) ? size : Integer.parseInt(DEFAULT_PAGE_SIZE);
-        //String baseUrl = PropertiesConfig.getSetting("app.base.url") + URL;
-        ListWithCount<Book> bookList = bookGetAllUseCase.execute(page - 1, pageSize);
-        PaginatedResponse<BookCollection> response = new PaginatedResponse<>(
-                bookList
-                        .getList()
-                        .stream()
-                        .map(BookMapper.INSTANCE::toBookCollection)
-                        .toList(),
-                bookList.getCount(), page, pageSize, BASE_URL);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        PaginatedResponse<BookUserCollection> response = this.getAll(page, size, BookMapper.INSTANCE::toBookUserCollection);
+        return this.buildResponse(response, HttpStatus.OK);
     }
 
-    @GetMapping("${app.admin.path}"+RESOURCE_PATH)
-    public ResponseEntity<PaginatedResponse<es.cesguiro.controller.admin.webmodel.book.BookCollection>> getAllAdmin(
+    @GetMapping(RESOURCE_ADMIN_PATH)
+    public ResponseEntity<PaginatedResponse<BookAdminCollection>> getAllAdmin(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(required = false) Integer size) {
+        PaginatedResponse<BookAdminCollection> response =
+                this.getAll(
+                        page, size,
+                        BookMapper.INSTANCE::toBookAdminCollection,
+                        this::getList,
+                        BASE_URL
+                );
 
-        int pageSize = (size != null) ? size : Integer.parseInt(defaultPageSize);
-        ListWithCount<Book> bookList = bookGetAllUseCase.execute(page - 1, pageSize);
-        PaginatedResponse<es.cesguiro.controller.admin.webmodel.book.BookCollection> response = new PaginatedResponse<>(
-                bookList
-                        .getList()
-                        .stream()
-                        .map(es.cesguiro.controller.admin.webmodel.book.BookMapper.INSTANCE::toBookCollection)
-                        .toList(),
-                bookList.getCount(), page, pageSize, BASE_URL);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return this.buildResponse(response, HttpStatus.OK);
     }
 
-
-
-    @GetMapping("/{isbn}")
-    public ResponseEntity<BookDetail> findByIsbn(@PathVariable String isbn) {
-        BookDetail bookDetail = BookMapper.INSTANCE.toBookDetail(bookFindByIsbnUseCase.execute(isbn));
-        return new ResponseEntity<>(bookDetail, HttpStatus.OK);
+    @GetMapping(RESOURCE_PATH+"/{isbn}")
+    public ResponseEntity<BookUserDetail> findByIsbnUser(@PathVariable String isbn) {
+        BookUserDetail bookDetail = BookMapper.INSTANCE.toBookUserDetail(bookFindByIsbnUseCase.execute(isbn));
+        return this.buildResponse(bookDetail, HttpStatus.OK);
     }
 
+    @GetMapping(RESOURCE_ADMIN_PATH+"/{isbn}")
+    public ResponseEntity<Book> findByIsbnAdmin(@PathVariable String isbn) {
+        return this.buildResponse(
+                bookFindByIsbnUseCase.execute(isbn),
+                HttpStatus.OK
+        );
+    }
+
+    /****** ADMIN USE CASES **********
+     ******                 **********/
+
+    @PostMapping(RESOURCE_ADMIN_PATH+"/{id}/authors")
+    public ResponseEntity<Void> insertAuthors(@PathVariable Integer id, @RequestBody List<Author> authors) {
+        bookInsertAuthorsUseCase.execute(id, authors);
+        return this.buildResponse(null, HttpStatus.CREATED);
+    }
+
+    @PostMapping(RESOURCE_ADMIN_PATH+"/{id}/genres")
+    public ResponseEntity<Void> insertGenres(@PathVariable Integer id, @RequestBody List<Genre> genres) {
+        bookInsertGenresUseCase.execute(id, genres);
+        return this.buildResponse(null, HttpStatus.CREATED);
+    }
+
+    @PostMapping(RESOURCE_ADMIN_PATH)
+    public ResponseEntity<Void> insert(@RequestBody Book book) {
+        bookInsertUseCase.execute(book);
+        return this.buildResponse(null, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(RESOURCE_ADMIN_PATH+"/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        bookDeleteUseCase.execute(id);
+        return this.buildResponse(null, HttpStatus.NO_CONTENT);
+    }
 
 
 }

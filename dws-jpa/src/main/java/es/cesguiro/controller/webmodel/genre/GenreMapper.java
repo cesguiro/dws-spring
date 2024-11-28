@@ -1,4 +1,4 @@
-package es.cesguiro.controller.user.webmodel.genre;
+package es.cesguiro.controller.webmodel.genre;
 
 import es.cesguiro.domain.model.Genre;
 import org.mapstruct.Mapper;

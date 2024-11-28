@@ -1,4 +1,4 @@
-package es.cesguiro.controller.user.webmodel.publisher;
+package es.cesguiro.controller.webmodel.publisher;
 
 public record PublisherCollection(
         long id,
