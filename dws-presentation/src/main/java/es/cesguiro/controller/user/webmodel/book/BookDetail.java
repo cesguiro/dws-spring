@@ -16,7 +16,7 @@ public record BookDetail(
         String cover,
         List<String> genres,
         String category,
-        @JsonProperty("publisher") PublisherCollection publisherCollection,
-        @JsonProperty("authors") List<AuthorCollection> authorsCollection
+        PublisherCollection publisher,
+        List<AuthorCollection> authors
 ) {
 }

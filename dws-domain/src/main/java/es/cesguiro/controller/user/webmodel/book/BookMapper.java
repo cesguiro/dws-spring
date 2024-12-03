@@ -15,10 +15,7 @@ public interface BookMapper {
 
     BookCollection toBookCollection(Book book);
 
-    @Mapping(target ="publisherCollection", source = "publisher")
-    @Mapping(target="authorsCollection", source = "authors")
     @Mapping(target = "category", source = "category.name")
-    @Mapping(target = "genres", source = "genres")
     BookDetail toBookDetail(Book book);
 
 }
