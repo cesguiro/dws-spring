@@ -200,7 +200,7 @@ public class BookDaoJdbc implements BookDaoDb {
                     INSERT INTO books_authors(book_id, author_id)
                     VALUES (?, ?)
                 """;
-        authors.stream().forEach(a -> jdbcTemplate.update(sql, id, a.getId()));
+        authors.forEach(a -> jdbcTemplate.update(sql, id, a.getId()));
     }
 
     @Override
@@ -218,7 +218,7 @@ public class BookDaoJdbc implements BookDaoDb {
                     INSERT INTO books_genres(book_id, genre_id)
                     VALUES(?, ?)
                 """;
-        genres.stream().forEach(g -> jdbcTemplate.update(sql, id, g.getId()));
+        genres.forEach(g -> jdbcTemplate.update(sql, id, g.getId()));
     }
 
 
