@@ -68,12 +68,7 @@ public class AuthorDaoJpa implements AuthorDaoDb {
                         .map(AuthorJpaMapper.INSTANCE::toAuthor)
                         .toList(),
                 authorEntities.getNumberOfElements()
-
         );
-        /*return authorJpaRepository.findAll(pageable)
-                .stream()
-                .map(AuthorJpaMapper.INSTANCE::toAuthor)
-                .toList();*/
     }
 
     @Override
