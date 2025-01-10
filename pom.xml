@@ -23,15 +23,6 @@
 
 	<developers>
 		<developer>
-			<name>César Guijarro</name>
-			<id>C.Guijarro</id>
-			<email>c.guijarrorosaleny@edu.gva.es</email>
-			<url>https://cesguiro.es</url>
-			<organization>CIPFP Mislata</organization>
-			<roles>
-				<role>Architect</role>
-				<role>Developer</role>
-			</roles>
 		</developer>
 	</developers>
 
@@ -50,7 +41,7 @@
         <module>dws-domain2</module>
         <module>dws-persistence</module>
         <module>dws-jpa</module>
-		<module>dws-validation</module>
+		<module>dws-architecture</module>
 	</modules>
 
 	<dependencies>
