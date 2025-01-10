@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>dws-jpa</artifactId>
+    <artifactId>dws-validation</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -47,8 +47,7 @@
                     <target>1.8</target>
                     <annotationProcessorPaths>
                         <path>
-                            <groupId>org.mapstruct
-                            </groupId>
+                            <groupId>org.mapstruct</groupId>
                             <artifactId>mapstruct-processor</artifactId>
                             <version>${org.mapstruct.version}</version>
                         </path>
